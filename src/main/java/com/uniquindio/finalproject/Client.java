@@ -29,7 +29,8 @@ public class Client {
         Purchase purchase = new Purchase(purchaseID, Location , valuePurchase);
         //UUID.randomUUID().toString()
         //Has to verify if the Purchuse Exist, this using his ID
-        if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase);
+        // For the future Set an Exception
+        if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase); else System.out.println("Can't be possible"); 
     }
     private Optional<Purchase> verifyPurchuse(Purchase purchase){
         Predicate<Purchase> condition = p-> p.getId().equals(purchase.getId());

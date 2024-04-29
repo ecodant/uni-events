@@ -4,19 +4,19 @@ package com.uniquindio.finalproject;
 public class Purchase {
 
   private String id;
-  private String location;
+  private String seat;
   private float valuePurchase;
 
-  public Purchase(String id, String location, float valuePurchase) {
+  public Purchase(String id, String seat, float valuePurchase) {
     this.id = id;
-    this.location = location;
+    this.seat = seat;
     this.valuePurchase = valuePurchase;
   }
   public String getId(){
     return this.id;
   }
   public String getLocation() {
-    return location;
+    return seat;
   }
   public float getValuePurchase() {
     return valuePurchase;

@@ -3,31 +3,51 @@ package com.uniquindio.finalproject;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Event {
 
     private String name;
-    private String city;
+    private final Collection<City> cities;
     private String description;
-    private EventType type;
+    private EventType eventType;
     private String image;
     private LocalDate date;
     private String address;
-    private final Collection<Seat> seats;
+    private Collection<Seat> seats;
   
-    public Event(String name, String city, String description, EventType type, String image, LocalDate date, String address, List<Seat> seats) {
+    public Event(String name, String description, EventType eventType, String image, LocalDate date, String address, List<Seat> seats) {
       this.name = name;
-      this.city = city;
+      this.eventType = eventType;
+      this.cities = new LinkedList<>();
       this.description = description;
-      this.type = type;
       this.image = image;
       this.date = date;
       this.address = address;
       this.seats = seats;
     }
-  
-    // Getters for all attributes
+    
+    // public void addSeats(Seat seat)
+    // {
+    //   //Exeption Fro the future!
+    //   if(!existingSeat(seat).isPresent()) seats.add(seat);
+    // }
+    // private Optional<Seat> existingSeat(Seat seat){
+    //     Predicate<Seat> condition = s-> s == seat;
+    //     return seats.stream().filter(condition).findAny();
+    // }
+    public void setCities(City city)
+    {
+      //Exeption Fro the future!
+      if(!cityValidation(city).isPresent()) cities.add(city);
+    }
+    private Optional<City> cityValidation(City city){
+        Predicate<City> condition = c-> c == city;
+        return cities.stream().filter(condition).findAny();
+    }
     public String getName() {
       return name;
     }

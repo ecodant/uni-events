@@ -30,8 +30,8 @@ public class Admin {
       return cuponFactory.getCupon(cuponType);
     }
   
-    public Event createEvent(String name, String city, String description, EventType type, String image, LocalDate date, String address, List<Seat> seats) {
-        return new Event(name, city, description, type, image, date, address, seats);
+    public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address, List<Seat> seats) {
+        return new Event(name, description, type, image, date, address, seats);
     }
 
     public String getUsername() {
