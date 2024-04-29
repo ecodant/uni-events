@@ -1,7 +1,7 @@
 
 # Programming II - Final Project
 
-## Estudiantes:
+## Students:
  -  Edwin Viña R.
  -  Daniel Garcia
 
@@ -10,9 +10,9 @@
 
 ## Project Overview:
 
-    UniEventos is a platform that facilitates ticket sales for concerts and events across Colombia. It caters to both customers and an administrator, offering comprehensive functionalities for managing events, purchasing tickets, and redeeming coupons.
+    UniEvents is a platform that facilitates ticket sales for concerts and events across Colombia. It caters to both customers and an administrator, offering comprehensive functionalities for managing events, purchasing tickets, and redeeming coupons.
 
-## Generals
+## Generals Aspects
 
 ### 1. User Management:
 
