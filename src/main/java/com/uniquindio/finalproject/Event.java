@@ -39,7 +39,7 @@ public class Event {
     //     Predicate<Seat> condition = s-> s == seat;
     //     return seats.stream().filter(condition).findAny();
     // }
-    public void setCities(City city)
+    public void setCity(City city)
     {
       //Exeption Fro the future!
       if(!cityValidation(city).isPresent()) cities.add(city);

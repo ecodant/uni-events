@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uniquindio.finalproject.StartUpController">
   <items>
       <VBox id="container-sign-in" alignment="CENTER" prefHeight="600.0" prefWidth="390.0" stylesheets="@css%20sources/style.css">
          <children>
@@ -31,25 +31,25 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
                <children>
-                  <TextField id="standard-field-input-w" prefHeight="25.0" promptText="Name" stylesheets="@css%20sources/style.css" />
-                  <TextField id="standard-field-input-w" layoutX="133.0" layoutY="15.0" prefHeight="25.0" promptText="Lastnames" stylesheets="@css%20sources/style.css" />
+                  <TextField id="standard-field-input-w" fx:id="nameField" prefHeight="25.0" promptText="Name" stylesheets="@css%20sources/style.css" />
+                  <TextField id="standard-field-input-w" fx:id="lastNames" layoutX="133.0" layoutY="15.0" prefHeight="25.0" promptText="Lastnames" stylesheets="@css%20sources/style.css" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="214.0" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <TextField id="standard-field-input-w" prefHeight="25.0" promptText="ID" style="-fx-max-width: 200;" stylesheets="@css%20sources/style.css" />
-                  <TextField id="standard-field-input-w" prefHeight="25.0" promptText="Phone Number" stylesheets="@css%20sources/style.css" />
+                  <TextField id="standard-field-input-w" fx:id="idUser" prefHeight="25.0" promptText="ID" style="-fx-max-width: 200;" stylesheets="@css%20sources/style.css" />
+                  <TextField id="standard-field-input-w" fx:id="phoneField" prefHeight="25.0" promptText="Phone Number" stylesheets="@css%20sources/style.css" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <TextField id="standard-field-input-w" prefHeight="25.0" promptText="Mail" style="-fx-max-width: 200;" stylesheets="@css%20sources/style.css" />
-                  <PasswordField id="standard-field-input-w" prefWidth="200.0" promptText="Password" stylesheets="@css%20sources/style.css" />
+                  <TextField id="standard-field-input-w" fx:id="mailField" prefHeight="25.0" promptText="Mail" style="-fx-max-width: 200;" stylesheets="@css%20sources/style.css" />
+                  <PasswordField id="standard-field-input-w" fx:id="passwordField" prefWidth="200.0" promptText="Password" stylesheets="@css%20sources/style.css" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="372.0" prefHeight="90.0" prefWidth="200.0">
                <children>
-                  <Button id="sign-up-btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="SIGN UP" wrapText="true" />
+                  <Button id="sign-up-btn" fx:id="btnSign" mnemonicParsing="false" onAction="#saveData" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="SIGN UP" wrapText="true" />
                </children>
             </HBox>
          </children>

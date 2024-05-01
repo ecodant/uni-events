@@ -1,9 +1,10 @@
 package com.uniquindio.finalproject;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 // import java.util.Date;
 
-public abstract class Cupon {
+public abstract class Cupon implements Serializable{
 
     private final float discountValue;
     private final LocalDate dateOfExpiry;

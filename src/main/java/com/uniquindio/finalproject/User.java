@@ -1,5 +1,6 @@
 package com.uniquindio.finalproject;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -8,7 +9,7 @@ import java.util.function.Predicate;
 
 import com.uniquindio.finalproject.Purchase.PurchaseBuilder;
 
-public class Client {
+public class User implements Serializable {
     private final Collection<Cupon> cupons;
     private int ID;
     private String name;
@@ -18,7 +19,7 @@ public class Client {
     private String password;
     private final Collection<Purchase> logPurchase;
 
-    public Client(int ID, String name, String lastname, String phoneNumber, String mail, String password) throws NoSuchFieldException{
+    public User(int ID, String name, String lastname, String phoneNumber, String mail, String password){
         this.ID = ID;
         this.name = name;
         this.lastname = lastname;
@@ -30,9 +31,9 @@ public class Client {
         //Primer cupon de 15% por registro
         CuponFactory cuponFactory = new CuponFactory();
 
-        cupons.add(cuponFactory.getCupon(CuponType.REGISTERED));
+        cupons.add(cuponFactory.createCupon(CuponType.REGISTERED));
     }
-    public void rawPurchase(String seat, float valuePurchase) throws NoSuchFieldException 
+    public void rawPurchase(String seat, float valuePurchase)  
     {   
  
         String purchaseID = UUID.randomUUID().toString();
@@ -43,7 +44,7 @@ public class Client {
         if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase); else System.out.println("Can't be possible"); 
         firstCuponValidation();
     }
-    public void cuponPurchase(String seat, float valuePurchase, Cupon cupon) throws NoSuchFieldException
+    public void cuponPurchase(String seat, float valuePurchase, Cupon cupon)
     {
         String purchaseID = UUID.randomUUID().toString();
         PurchaseBuilder builder = new PurchaseBuilder();
@@ -62,12 +63,17 @@ public class Client {
         return logPurchase.stream().filter(condition).findAny();
     }
     //Validación Primer Cupon
-    public void firstCuponValidation() throws NoSuchFieldException{
-        Predicate<Cupon> condicion = c->c.getClass().equals(CuponFirstPurchase.class);
+    public void firstCuponValidation() {
+        Predicate<Cupon> condicion = c-> c.getClass().equals(CuponFirstPurchase.class);
         boolean cuponValidation = cupons.stream().filter(condicion).findAny().isPresent();
         if(!cuponValidation && cupons.size() <= 1) {
             CuponFactory cuponFactory = new CuponFactory();
-            cupons.add(cuponFactory.getCupon(CuponType.FIRST_PURCHASE));
+            cupons.add(cuponFactory.createCupon(CuponType.FIRST_PURCHASE));
         }
     }
+    public Collection<Cupon> getCupons() {
+        return cupons;
+    }
+    
+
 }

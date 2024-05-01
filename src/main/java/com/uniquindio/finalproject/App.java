@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  * JavaFX App
@@ -17,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("screen-01"), 900, 600);
+        scene = new Scene(loadFXML("startup-UI"), 900, 600);
         stage.setScene(scene);
         stage.show();
     }
@@ -33,6 +34,9 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        // User user = new User(2382832, "Carlos", "Villa", "313293287", "capitanazo@gmail.com", "fatherland");
+        // Collection<Cupon> cupons = user.getCupons();
+        // System.out.println(cupons.iterator().next());
     }
 
 }

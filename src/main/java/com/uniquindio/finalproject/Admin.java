@@ -27,7 +27,7 @@ public class Admin {
 
     public Cupon createCupon(CuponType cuponType) throws NoSuchFieldException {
       CuponFactory cuponFactory = new CuponFactory();
-      return cuponFactory.getCupon(cuponType);
+      return cuponFactory.createCupon(cuponType);
     }
   
     public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address, List<Seat> seats) {
