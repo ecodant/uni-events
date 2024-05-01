@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class CuponFactory {
         private final static Map<CuponType, Cupon> cupons = new HashMap<>(){{
-        put(CuponType.WEEKEND, new CuponWeekend((float) 0.15, LocalDate.now().minusDays(15), LocalDate.now().plusMonths(1)));
+        put(CuponType.REGISTERED, new CuponRegistered((float) 0.15, LocalDate.now().minusDays(15), LocalDate.now().plusMonths(1)));
+        put(CuponType.FIRST_PURCHASE, new CuponFirstPurchase((float) 0.10, LocalDate.now().minusDays(15), LocalDate.now().plusMonths(1)));
 
     }};
     public Cupon getCupon(CuponType cuponType) throws NoSuchFieldException{
