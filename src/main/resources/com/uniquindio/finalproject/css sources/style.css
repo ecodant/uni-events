@@ -3,7 +3,7 @@
     -fx-aligment:center;
 }
 #container-white{
-    -fx-background-color: #fff;
+    -fx-background-color: linear-gradient(to right, #f9fcff 0%, #e1f5f9 100%);
     -fx-aligment:center;
 }
 #login-text-w{
