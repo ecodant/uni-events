@@ -7,6 +7,7 @@
     -fx-font-size: 22px;
     -fx-aligment:center;
     -fx-font-weight: medium;
+    -fx-text-fill: #161616;
 }
 .standard-field{
     /* -fx-font-family: "Open Sans", sans-serif; */

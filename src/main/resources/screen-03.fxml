@@ -17,13 +17,13 @@
          <children>
             <ImageView fitHeight="273.0" fitWidth="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/SCREEN03_Mesa%20de%20trabajo%201.png" />
+                  <Image url="@img/SCREEN03-01.png" />
                </image>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </ImageView>
-            <Label id="login-text-w" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="379.0" style="-fx-text-fill: black;" stylesheets="@css%20sources/style.css" text="We're almost there!" textAlignment="CENTER" wrapText="true">
+            <Label id="login-text-w" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="379.0" style="-fx-text-fill: #404040;" stylesheets="@css%20sources/style.css" text="We're almost there!" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>

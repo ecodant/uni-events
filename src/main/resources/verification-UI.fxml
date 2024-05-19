@@ -7,52 +7,58 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
-      <VBox id="Vbox-container" alignment="CENTER">
-         <children>
-            <ImageView fitHeight="170.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-               <image>
-                  <Image url="@img/SCREEN04-01.png" />
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="335.0" stylesheets="@css%20sources/style_UI.css" text="Verification Code" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-            <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dark-text-opacity" text="A e-mail with a six-digit verification code has been sent to your mail " textAlignment="CENTER" wrappingWidth="203.54296875">
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </Text>
-            <VBox alignment="CENTER">
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
+        <items>
+            <VBox id="Vbox-container" alignment="CENTER" stylesheets="@css%20sources/style_UI.css">
                <children>
-                  <TextField alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="standard-field" stylesheets="@css%20sources/style_UI.css" />
+                  <ImageView fitHeight="170.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@img/SCREEN04-01.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="335.0" stylesheets="@css%20sources/style_UI.css" text="Verification Code" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Text fill="#757575" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 13px;" text="A e-mail with a six-digit verification code has been sent to your mail " textAlignment="CENTER" wrappingWidth="203.54296875">
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                  </Text>
+                  <VBox alignment="CENTER" stylesheets="@css%20sources/style_UI.css">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-text-fill: #161616;" styleClass="standard-field" stylesheets="@css%20sources/style_UI.css" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="350.0" right="350.0" />
+                     </padding>
+                  </VBox>
+                  <Button id="sign-up-btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="CONFIRM" wrapText="true">
+                     <VBox.margin>
+                        <Insets top="35.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="350.0" right="350.0" />
-               </padding>
             </VBox>
-            <Button id="sign-up-btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="CONFIRM" wrapText="true">
-               <VBox.margin>
-                  <Insets top="35.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-  </items>
-</SplitPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
