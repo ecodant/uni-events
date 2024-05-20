@@ -9,16 +9,16 @@ public class Admin {
     private String username;
     private String password;
   
-    private Admin(String username, String password) {
-      this.username = username;
-      this.password = password;
+    private Admin() {
+      this.username = "admin@unieventos.com";
+      this.password = "admin123";
     }
   
-    public static Admin getInstance(String username, String password) {
+    public static Admin getInstance() {
       if (instance == null) {
         synchronized (Admin.class) {
           if (instance == null) {
-            instance = new Admin(username, password);
+            instance = new Admin();
           }
         }
       }

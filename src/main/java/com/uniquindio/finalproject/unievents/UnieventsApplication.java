@@ -1,10 +1,16 @@
 package com.uniquindio.finalproject.unievents;
+import org.springframework.boot.SpringApplication;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.ConfigurableApplicationContext;
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,25 +19,62 @@ import javafx.stage.Stage;
 
 @SpringBootApplication
 public class UnieventsApplication extends Application{
+	private DataUniEvent eventData = new DataUniEvent();
 	@Autowired
-	private EmailSenderServicie senderServicie;
+    private EmailSenderService senderService;
+    private static ConfigurableApplicationContext context;
+    private static UnieventsApplication instance;
+	private static DataUniEvent dataUniEvent;
+    public UnieventsApplication() {
+        instance = this;
+    }
+
+    public static UnieventsApplication getInstance() {
+        return instance;
+    }
 	public static void main(String[] args) {
-		// SpringApplication.run(UnieventsApplication.class, args);
-		System.out.println("HELP MEE PLEEASS");
-		launch();
+		context = SpringApplication.run(UnieventsApplication.class, args);
+        launch();
 		
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		var context = SpringApplication.run(UnieventsApplication.class);
+		File file = new File("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
+        if (file.exists()) {
+            dataUniEvent = DataUniEvent.loadFromFile("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
+			// try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            // 	dataUniEvent = (DataUniEvent) in.readObject();
+        	// } catch (IOException | ClassNotFoundException e) {
+			// 	e.printStackTrace();
+        	// }
+
+            if (dataUniEvent == null) {
+                System.out.println("Failed to load data. Initializing new DataUniEvent.");
+                dataUniEvent = new DataUniEvent();
+                dataUniEvent.initializeMainCities();
+            } else {
+                System.out.println(dataUniEvent);
+                System.out.println("Data loaded successfully.");
+            }
+
+        } else {
+			System.out.println("You're here");
+            dataUniEvent = new DataUniEvent();
+            dataUniEvent.initializeMainCities();
+        }
+
+		context.getAutowireCapableBeanFactory().autowireBean(this);
 		FXMLLoader fxml = new FXMLLoader(getClass().getResource("/startup-UI.fxml"));
 		var scene = new Scene(fxml.load(), 900, 600);
 		stage.setScene(scene);
 		stage.show();
 	}
-	// @EventListener(ApplicationReadyEvent.class)
-	// public void sendMail(){
-	// 	senderServicie.sendEmail("edwin.vinar@uqvirtual.edu.co", "Test02", "This my test mail");
-	// }
+
+	public void sendMail(String mail, String subject, String body){
+		senderService.sendEmail(mail, subject, body);
+	}
+	public static DataUniEvent getDataUniEvent() {
+        return dataUniEvent;
+    }
 }

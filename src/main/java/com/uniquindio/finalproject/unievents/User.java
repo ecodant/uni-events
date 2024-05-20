@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import com.uniquindio.finalproject.unievents.Purchase.PurchaseBuilder;
 
 public class User implements Serializable {
+    // private static final long serialVersionUID = 1L;
     private final Collection<Cupon> cupons;
     private int ID;
     private String name;
@@ -74,6 +75,23 @@ public class User implements Serializable {
     public Collection<Cupon> getCupons() {
         return cupons;
     }
-    
+    public int getID() {
+        return ID;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getLastname() {
+        return lastname;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public String getMail() {
+        return mail;
+    }
+    public String getPassword() {
+        return password;
+    }
 
 }

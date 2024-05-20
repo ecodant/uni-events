@@ -1,5 +1,6 @@
 package com.uniquindio.finalproject.unievents;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -7,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class Event {
+public class Event implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private final Collection<City> cities;

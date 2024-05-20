@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uniquindio.finalproject.unievents.LoginController">
    <children>
       <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
         <items>
@@ -35,9 +34,9 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField id="standard-field-input-w" prefHeight="43.0" prefWidth="100.0" promptText="Mail" stylesheets="@css%20sources/style.css" />
-                  <PasswordField id="standard-field-input-w" promptText="Password" stylesheets="@css%20sources/style.css" />
-                  <Button id="sign-up-btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="SIGN IN" wrapText="true">
+                  <TextField id="standard-field-input-w" fx:id="mailField" prefHeight="43.0" prefWidth="100.0" promptText="Mail" stylesheets="@css%20sources/style.css" />
+                  <PasswordField id="standard-field-input-w" fx:id="passwordField" promptText="Password" stylesheets="@css%20sources/style.css" />
+                  <Button id="sign-up-btn" fx:id="signInButton" mnemonicParsing="false" onAction="#validateUser" prefHeight="40.0" prefWidth="120.0" style="-fx-border-width: 10;" stylesheets="@css%20sources/style.css" text="SIGN IN" wrapText="true">
                      <VBox.margin>
                         <Insets top="35.0" />
                      </VBox.margin>

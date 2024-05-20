@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-public class StartUpController {
+public class StartUpController extends BaseController{
     
     @FXML
     private Button signUpButton;
@@ -46,35 +46,21 @@ public class StartUpController {
 
     @FXML
     public void saveData(ActionEvent event){
-        if (!validateFields()) {
-            // If any validation fails, return without creating the User object
-            return;
-        }
+        if (!validateFields()) return;
 
-        // Extract user data from text fields
         int id = Integer.parseInt(idUser.getText());
         User user = new User(id, nameField.getText(), lastNames.getText(), phoneField.getText(), mailField.getText(), passwordField.getText());
 
-        try {
-            FileOutputStream fileOut = new FileOutputStream("userData.txt");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(user);
-            fileOut.close();
-            out.close();
-            System.out.println("User data saved successfully.");
-            transtionScene("/verification-UI.fxml");
-        }   
-        catch (IOException e) {
-            // Handle serialization exceptions (e.g., file access issues)
-            System.out.println("Error saving user data: " + e.getMessage());
-        }
+        saveUser("User_Vefication.ser", user);
+
+        handleSignUpAction("/verification-UI.fxml");
     }
 
     private boolean validateFields() {
-        return validateName() && validateLastNames() && validateIdUser() && validatePhone() && validateMail() && validatePassword();
+        return (validateName() && validateLastNames() && validateIdUser() && validatePhone() && validateMail() && validatePassword());
     }
 
-private boolean validateName() {
+    private boolean validateName() {
         String name = nameField.getText();
         if (name.isEmpty()) {
             showAlert(AlertType.WARNING, "Validation Error", "Name field is empty.");
@@ -140,21 +126,39 @@ private boolean validateName() {
         alert.showAndWait();
     }
 
-    @FXML
-    private void transtionScene(String path) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(path));
-        Scene scene = signUpButton.getScene();
+    // @FXML
+    // private void transtionScene(String path) throws IOException {
+    //     Parent root = FXMLLoader.load(getClass().getResource(path));
+    //     Scene scene = signUpButton.getScene();
 
-        root.translateXProperty().set(scene.getWidth());
-        container.getChildren().add(root);
+    //     root.translateXProperty().set(scene.getWidth());
+    //     container.getChildren().add(root);
 
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.8), kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event1 -> {
-            container.getChildren().remove(anchorRoot);
-        });
-        timeline.play();
+    //     Timeline timeline = new Timeline();
+    //     KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
+    //     KeyFrame kf = new KeyFrame(Duration.seconds(0.8), kv);
+    //     timeline.getKeyFrames().add(kf);
+    //     timeline.setOnFinished(event1 -> {
+    //         container.getChildren().remove(anchorRoot);
+    //     });
+    //     timeline.play();
+    // }
+    public void saveUser(String filePath, User user) {
+        
+        try (FileOutputStream fileOut = new FileOutputStream(filePath);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(user);
+            System.out.println("Yeah USERZAO is saved dude!");
+        } catch (IOException e) {
+            System.out.println("Error saving user data: " + e.getMessage());
+        }
+    }
+    
+    private void handleSignUpAction(String path) {
+        try {
+            transitionScene(anchorRoot, path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
