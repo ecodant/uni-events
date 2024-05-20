@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
+
 import org.springframework.context.ConfigurableApplicationContext;
 
 
@@ -43,11 +43,6 @@ public class UnieventsApplication extends Application{
 		File file = new File("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
         if (file.exists()) {
             dataUniEvent = DataUniEvent.loadFromFile("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
-			// try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-            // 	dataUniEvent = (DataUniEvent) in.readObject();
-        	// } catch (IOException | ClassNotFoundException e) {
-			// 	e.printStackTrace();
-        	// }
 
             if (dataUniEvent == null) {
                 System.out.println("Failed to load data. Initializing new DataUniEvent.");
@@ -70,7 +65,20 @@ public class UnieventsApplication extends Application{
 		stage.setScene(scene);
 		stage.show();
 	}
+    @Override
+    public void stop() throws Exception {
 
+        
+        System.out.println("Application is closing...");
+
+        closeAppActions();
+        
+        super.stop();
+    }
+    public void closeAppActions() {
+        dataUniEvent.saveToFile("dataUniEvent.ser"); 
+        System.out.println("Saving data before exiting...");
+      }
 	public void sendMail(String mail, String subject, String body){
 		senderService.sendEmail(mail, subject, body);
 	}

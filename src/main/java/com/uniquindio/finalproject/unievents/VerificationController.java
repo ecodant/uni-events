@@ -45,7 +45,7 @@ public class VerificationController extends BaseController {
         };        
         DataUniEvent dataUniEvent = UnieventsApplication.getDataUniEvent();
         dataUniEvent.addUser(user);
-        dataUniEvent.saveToFile("dataUniEvent.ser"); 
+        //dataUniEvent.saveToFile("dataUniEvent.ser"); 
         handleSignUpAction();
     }
     

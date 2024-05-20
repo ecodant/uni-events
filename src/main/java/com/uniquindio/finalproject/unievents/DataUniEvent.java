@@ -33,6 +33,10 @@ public class DataUniEvent implements Serializable {
     public Collection<City> getCities() {
         return cities;
     }
+    public Collection<User> getUsers() {
+        return users;
+    }
+    //Este método nunca debería llarmse para el nuevo contexto
     public void addUser(User user){
         if(!verifyUser(user).isPresent()){
             users.add(user);
@@ -77,6 +81,13 @@ public class DataUniEvent implements Serializable {
     public Optional<User> searchUser(User user){
         Predicate<User> condicion = u-> u.getName().equals(user.getName()) && u.getMail().equals(user.getMail()) && u.getID() == user.getID();
         return users.stream().filter(condicion).findAny();
+    }
+    public Optional<User> loginChecker(String password, String mail){
+        Predicate<User> condicion = u->  u.getMail().equals(mail) && u.getPassword().equals(password);
+        return users.stream().filter(condicion).findAny();
+    }
+    public UniEventIterator<User> getUserIterator() {
+        return new UserIterator(users);
     }
     // Deserialization method
     public static DataUniEvent loadFromFile(String filePath) {

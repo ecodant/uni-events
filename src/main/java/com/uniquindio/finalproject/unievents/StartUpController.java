@@ -2,6 +2,8 @@ package com.uniquindio.finalproject.unievents;
 
 
 import java.io.*;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import javafx.animation.Interpolator;
@@ -24,9 +26,12 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class StartUpController extends BaseController{
-    
+
+    private DataUniEvent dataUniEvent;
     @FXML
     private Button signUpButton;
+    @FXML
+    private Button signInBtn;
     @FXML
     private AnchorPane anchorRoot;
     @FXML
@@ -45,12 +50,20 @@ public class StartUpController extends BaseController{
     private PasswordField passwordField;
 
     @FXML
-    public void saveData(ActionEvent event){
+    public void signInAction(ActionEvent event){
+        handleSignUpAction("/signIn-UI.fxml");
+    }
+    @FXML
+    public void signUpAction(ActionEvent event){
         if (!validateFields()) return;
-
+        
         int id = Integer.parseInt(idUser.getText());
         User user = new User(id, nameField.getText(), lastNames.getText(), phoneField.getText(), mailField.getText(), passwordField.getText());
-
+        //Revisar esta condition luego
+        if(searchUser(user).isPresent()){
+            showAlert(AlertType.ERROR, "Registration Error", "Try Again cause that User is already registered!");
+            return;
+        }
         saveUser("User_Vefication.ser", user);
 
         handleSignUpAction("/verification-UI.fxml");
@@ -125,7 +138,11 @@ public class StartUpController extends BaseController{
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    public Optional<User> searchUser(User user){ 
+        dataUniEvent = UnieventsApplication.getDataUniEvent();
+        Predicate<User> condition = u-> u.getMail().equals(user.getMail()) || u.getID() == user.getID() ;
+        return dataUniEvent.getUsers().stream().filter(condition).findAny();
+    }
     // @FXML
     // private void transtionScene(String path) throws IOException {
     //     Parent root = FXMLLoader.load(getClass().getResource(path));
