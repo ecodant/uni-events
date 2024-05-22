@@ -131,12 +131,11 @@ public class SeatsEditorController {
         Event event = admin.createEvent(nameEvent, descriptionEvent, eventType, imgURL, dateEvent, addresEvent, seatCollection);
         dataUniEvent.addEvent(event);
     
-        // Load the Admin Panel and refresh the table
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-panel.fxml"));
             AnchorPane adminPane = loader.load();
             AdminPanelController adminPanelController = loader.getController();
-            adminPanelController.refreshTable();  // Refresh the table with the new event
+            adminPanelController.refreshTable();
         } catch (IOException e) {
             e.printStackTrace();
         }

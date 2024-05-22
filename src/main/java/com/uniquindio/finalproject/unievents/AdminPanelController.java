@@ -9,15 +9,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
-
+import com.gluonhq.charm.glisten.control.Icon;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
+
 
 public class AdminPanelController extends BaseController {
     private DataUniEvent dataUniEvent;
     @FXML
     private Button addBtn;
+    @FXML
+    private Icon refreshIcon;
     @FXML
     private Button deleteBtn;
     @FXML
@@ -156,21 +159,5 @@ public class AdminPanelController extends BaseController {
             e.printStackTrace();
         }
     }
-    public void insertInTable(){
-        dataUniEvent = UnieventsApplication.getDataUniEvent();
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        typeColumn.setCellValueFactory(cellData -> cellData.getValue().eventTypeProperty().asString());
-        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
-        addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
-        dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        imageColumn.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
-
-        UniEventIterator iterator = dataUniEvent.getEventIterator();
-
-        while(iterator.hasNext()){
-            eventList.add((Event) iterator.next());
-        }
-
-        eventTable.setItems(eventList);
-  }
+  
 }

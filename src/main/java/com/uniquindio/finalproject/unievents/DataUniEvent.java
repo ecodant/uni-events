@@ -113,7 +113,6 @@ public class DataUniEvent implements Serializable {
         events.remove(event);
     }
     
-    // Deserialization method
     public static DataUniEvent loadFromFile(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             return (DataUniEvent) in.readObject();

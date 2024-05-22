@@ -14,6 +14,14 @@
     -fx-aligment:center;
     -fx-font-weight: bold;
 }
+#event-text{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-text-fill: #4e4e4e;
+    -fx-font-size: 22px;
+    -fx-aligment:center;
+    -fx-font-weight: bold;
+}
 #sign-up-text{
     -fx-font-family: "Roboto", sans-serif;
     -fx-line-spacing: -5px;
