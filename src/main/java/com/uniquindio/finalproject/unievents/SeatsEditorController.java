@@ -128,7 +128,7 @@ public class SeatsEditorController {
         generateSeats(priceVIPValue, vipCapacityValue, SeatType.VIP, seatsVIPValue);
         generateSeats(priceLawnValue, lawnCapacityValue, SeatType.LAWN, seatsLawnValue);
     
-        Event event = admin.createEvent(nameEvent, descriptionEvent, eventType, imgURL, dateEvent, addresEvent, seatCollection);
+        Event event = admin.createEvent(nameEvent, descriptionEvent, eventType, imgURL, dateEvent, addresEvent);
         dataUniEvent.addEvent(event);
     
         try {

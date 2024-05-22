@@ -24,14 +24,14 @@ public class Event implements Serializable {
     private transient SimpleStringProperty address;
     private Collection<Seat> seats;
 
-    public Event(String name, String description, EventType eventType, String image, LocalDate date, String address, Collection<Seat> seats) {
+    public Event(String name, String description, EventType eventType, String image, LocalDate date, String address) {
         this.name = new SimpleStringProperty(name);
         this.description = new SimpleStringProperty(description);
         this.eventType = new SimpleObjectProperty<>(eventType);
         this.image = new SimpleStringProperty(image);
         this.date = new SimpleObjectProperty<>(date);
         this.address = new SimpleStringProperty(address);
-        this.seats = seats;
+        this.seats = new LinkedList<>();;
     }
 
     public SimpleStringProperty nameProperty() { return name; }
@@ -49,7 +49,11 @@ public class Event implements Serializable {
     public LocalDate getDate() { return date.get(); }
     public String getAddress() { return address.get(); }
     public Collection<Seat> getSeats() { return seats; }
-
+    
+    public void addSeat(float price, short capacity, SeatType seatType) {
+        Seat newSeat = new Seat(price, capacity, seatType);
+        seats.add(newSeat);
+    }
     // Custom serialization methods
     private void writeObject(ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();

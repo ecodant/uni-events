@@ -2,9 +2,6 @@ package com.uniquindio.finalproject.unievents;
 import org.springframework.boot.SpringApplication;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,7 +38,7 @@ public class UnieventsApplication extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		File file = new File("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
+		File file = new File("dataUniEvent.ser");
         if (file.exists()) {
             dataUniEvent = DataUniEvent.loadFromFile("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
             if (dataUniEvent == null) {
