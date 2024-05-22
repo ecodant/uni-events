@@ -24,8 +24,6 @@ public class SeatsEditorController {
 
     private DataUniEvent dataUniEvent;
     @FXML
-    private AnchorPane anchorPane;
-    @FXML
     private DialogPane dialogPane;
     @FXML
     private TextField seatsConcert;
@@ -129,12 +127,23 @@ public class SeatsEditorController {
         generateSeats(priceGeneralValue, generalCapacityValue, SeatType.GENERAL_ADMISSION, seatsGeneralValue);
         generateSeats(priceVIPValue, vipCapacityValue, SeatType.VIP, seatsVIPValue);
         generateSeats(priceLawnValue, lawnCapacityValue, SeatType.LAWN, seatsLawnValue);
-
+    
         Event event = admin.createEvent(nameEvent, descriptionEvent, eventType, imgURL, dateEvent, addresEvent, seatCollection);
         dataUniEvent.addEvent(event);
-
+    
+        // Load the Admin Panel and refresh the table
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-panel.fxml"));
+            AnchorPane adminPane = loader.load();
+            AdminPanelController adminPanelController = loader.getController();
+            adminPanelController.refreshTable();  // Refresh the table with the new event
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
         dialogPane.getScene().getWindow().hide();
     }
+    
 
     private void generateSeats(float price, short capacity, SeatType seatType, short numberOfSeats) {
         for (int i = 0; i < numberOfSeats; i++) {

@@ -48,7 +48,7 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button id="fade-red-btn" mnemonicParsing="false" stylesheets="@css%20sources/style.css" text="DELETE" />
+                        <Button id="fade-red-btn" mnemonicParsing="false" onAction="#handleDelete" stylesheets="@css%20sources/style.css" text="DELETE" />
                         <Button id="fade-btn" fx:id="singOutBtn" alignment="CENTER" layoutX="432.0" layoutY="10.0" mnemonicParsing="false" onAction="#backHome" stylesheets="@css%20sources/style.css" text="SING OUT" />
                      </children>
                      <VBox.margin>

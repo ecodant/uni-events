@@ -50,25 +50,10 @@ public class AdminPanelController extends BaseController {
         addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         imageColumn.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
-
-        UniEventIterator iterator = dataUniEvent.getEventIterator();
-
-        while(iterator.hasNext()){
-            eventList.add((Event) iterator.next());
-        }
- 
-        eventTable.setItems(eventList);
+    
+        refreshTable();
     }
-    public void refreshTable(){
-        dataUniEvent = UnieventsApplication.getDataUniEvent();
-        UniEventIterator iterator = dataUniEvent.getEventIterator();
-        ObservableList<Event> listTest = FXCollections.observableArrayList();
-        while(iterator.hasNext()){
-            listTest.add((Event) iterator.next());
-        }
-        System.out.println("THE REFRESHTABLE");
-        eventTable.setItems(eventList);
-    }
+    
     @FXML
     public void handleNew(ActionEvent event) {
         try {
@@ -86,13 +71,12 @@ public class AdminPanelController extends BaseController {
 
             Optional<ButtonType> result = eventDialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.NEXT) {
-                // Load the seats editor dialog
+
                 FXMLLoader seatsLoader = new FXMLLoader();
                 seatsLoader.setLocation(getClass().getResource("/seatsEditor.fxml"));
                 DialogPane seatsDialogPane = seatsLoader.load();
                 SeatsEditorController seatsController = seatsLoader.getController();
 
-                // Pass data from event editor to seats editor
                 seatsController.setNameEvent(eventController.getNameField().getText());
                 seatsController.setDescriptionEvent(eventController.getDescriptionField().getText());
                 seatsController.setAddresEvent(eventController.getAddressField().getText());
@@ -117,6 +101,42 @@ public class AdminPanelController extends BaseController {
             showAlert(AlertType.WARNING, "The Dialog Fails", "Check the Dialog, bro!");
         }
     }
+    public void refreshTable() {
+        eventList.clear();
+        UniEventIterator iterator = dataUniEvent.getEventIterator();
+    
+        while (iterator.hasNext()) {
+            eventList.add((Event) iterator.next());
+        }
+    
+        eventTable.setItems(eventList);
+    }
+    @FXML
+    public void handleDelete(ActionEvent event) {
+        Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
+        if (selectedEvent != null) {
+            // Confirmation dialog before deleting
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Delete Event");
+            alert.setContentText("Are you sure you want to delete the selected event?");
+            
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Remove the selected event from the data source
+                dataUniEvent.removeEvent(selectedEvent);
+                eventList.remove(selectedEvent); // Remove from the observable list
+                eventTable.refresh(); // Refresh the table view
+            }
+        } else {
+            // If no item is selected, show an alert
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Event Selected");
+            alert.setContentText("Please select an event to delete.");
+            alert.showAndWait();
+        }
+    }
 
     public void backHome(ActionEvent event){
         handleSignUpAction("/startup-UI.fxml");
@@ -136,21 +156,21 @@ public class AdminPanelController extends BaseController {
             e.printStackTrace();
         }
     }
-  public void insertInTable(){
-    dataUniEvent = UnieventsApplication.getDataUniEvent();
-    nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-    typeColumn.setCellValueFactory(cellData -> cellData.getValue().eventTypeProperty().asString());
-    descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
-    addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
-    dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-    imageColumn.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
+    public void insertInTable(){
+        dataUniEvent = UnieventsApplication.getDataUniEvent();
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        typeColumn.setCellValueFactory(cellData -> cellData.getValue().eventTypeProperty().asString());
+        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+        addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
+        dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        imageColumn.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
 
-    UniEventIterator iterator = dataUniEvent.getEventIterator();
+        UniEventIterator iterator = dataUniEvent.getEventIterator();
 
-    while(iterator.hasNext()){
-        eventList.add((Event) iterator.next());
-    }
+        while(iterator.hasNext()){
+            eventList.add((Event) iterator.next());
+        }
 
-    eventTable.setItems(eventList);
+        eventTable.setItems(eventList);
   }
 }

@@ -109,6 +109,10 @@ public class DataUniEvent implements Serializable {
     public UniEventIterator<Event> getEventIterator() {
         return new EventIterator(events);
     }
+    public void removeEvent(Event event) {
+        events.remove(event);
+    }
+    
     // Deserialization method
     public static DataUniEvent loadFromFile(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
