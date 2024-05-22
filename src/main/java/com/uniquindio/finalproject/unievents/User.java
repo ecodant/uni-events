@@ -34,7 +34,7 @@ public class User implements Serializable {
 
         cupons.add(cuponFactory.createCupon(CuponType.REGISTERED));
     }
-    public void rawPurchase(String seat, float valuePurchase)  
+    public void rawPurchase(Seat seat, float valuePurchase)  
     {   
  
         String purchaseID = UUID.randomUUID().toString();
@@ -45,7 +45,7 @@ public class User implements Serializable {
         if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase); else System.out.println("Can't be possible"); 
         firstCuponValidation();
     }
-    public void cuponPurchase(String seat, float valuePurchase, Cupon cupon)
+    public void cuponPurchase(Seat seat, float valuePurchase, Cupon cupon)
     {
         String purchaseID = UUID.randomUUID().toString();
         PurchaseBuilder builder = new PurchaseBuilder();

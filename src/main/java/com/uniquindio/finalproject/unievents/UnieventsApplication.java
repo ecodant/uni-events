@@ -40,16 +40,16 @@ public class UnieventsApplication extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
+
 		File file = new File("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
         if (file.exists()) {
             dataUniEvent = DataUniEvent.loadFromFile("D:\\Java Projects\\uni-events\\dataUniEvent.ser");
-
             if (dataUniEvent == null) {
                 System.out.println("Failed to load data. Initializing new DataUniEvent.");
                 dataUniEvent = new DataUniEvent();
                 dataUniEvent.initializeMainCities();
             } else {
-                System.out.println(dataUniEvent);
+                // System.out.println(dataUniEvent);
                 System.out.println("Data loaded successfully.");
             }
 
@@ -62,13 +62,16 @@ public class UnieventsApplication extends Application{
 		context.getAutowireCapableBeanFactory().autowireBean(this);
 		FXMLLoader fxml = new FXMLLoader(getClass().getResource("/startup-UI.fxml"));
 		var scene = new Scene(fxml.load(), 900, 600);
+        // UniEventIterator iterator = dataUniEvent.getEventIterator();
+        // while(iterator.hasNext()){
+        //     System.out.println("OBJECT in the Events List");
+        // }
+        stage.setTitle("Uni-Events");
 		stage.setScene(scene);
 		stage.show();
 	}
     @Override
     public void stop() throws Exception {
-
-        
         System.out.println("Application is closing...");
 
         closeAppActions();

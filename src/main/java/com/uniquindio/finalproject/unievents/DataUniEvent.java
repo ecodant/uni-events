@@ -15,11 +15,13 @@ public class DataUniEvent implements Serializable {
     private final Collection<Event> events;
     private final Collection<City> cities;
     private final Collection<User> users;
+
     public DataUniEvent() {
         notificationService = new NotificationService();
         this.events = new LinkedList<>();
         this.cities = new LinkedList<>();
         this.users = new LinkedList<>();
+        
     }
 
     public void newEventPromotion() {
@@ -36,12 +38,22 @@ public class DataUniEvent implements Serializable {
     public Collection<User> getUsers() {
         return users;
     }
+    public Collection<Event> getEvents() {
+        return events;
+    }
     //Este método nunca debería llarmse para el nuevo contexto
     public void addUser(User user){
         if(!verifyUser(user).isPresent()){
             users.add(user);
         }
         else showAlert(AlertType.INFORMATION, "User registered!", "The user is already registered in the System");
+        
+    }
+    public void addEvent(Event event){
+        if(!verifyEvent(event).isPresent()){
+            events.add(event);
+        }
+        else showAlert(AlertType.INFORMATION, "The Event is already created!", "Please created a new one");
         
     }
      private void showAlert(AlertType alertType, String title, String message) {
@@ -54,6 +66,11 @@ public class DataUniEvent implements Serializable {
     private Optional<User> verifyUser(User user){
         Predicate<User> condition = u-> u.getName().equals(user.getName()) && u.getID() == user.getID() && u.getMail() == user.getMail();
         return users.stream().filter(condition).findAny();
+    }
+    private Optional<Event> verifyEvent(Event event){
+        Predicate<Event> condition = e-> e.getName().equals(event.getName()) && e.getDescription() == event.getDescription() 
+                                    && e.getDate().equals(event.getDate()) &&  e.getEventType().equals(event.getEventType());
+        return events.stream().filter(condition).findAny();
     }
     // Initialize main cities
     public void initializeMainCities() {
@@ -88,6 +105,9 @@ public class DataUniEvent implements Serializable {
     }
     public UniEventIterator<User> getUserIterator() {
         return new UserIterator(users);
+    }
+    public UniEventIterator<Event> getEventIterator() {
+        return new EventIterator(events);
     }
     // Deserialization method
     public static DataUniEvent loadFromFile(String filePath) {

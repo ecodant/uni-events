@@ -1,6 +1,7 @@
 package com.uniquindio.finalproject.unievents;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 public class Admin {
@@ -30,7 +31,7 @@ public class Admin {
       return cuponFactory.createCupon(cuponType);
     }
   
-    public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address, List<Seat> seats) {
+    public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address, Collection<Seat> seats) {
         return new Event(name, description, type, image, date, address, seats);
     }
 

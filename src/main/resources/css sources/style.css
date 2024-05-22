@@ -61,6 +61,17 @@
     -fx-font-weight: bold;
 
 }
+#fade-btn {
+    -fx-aligment:center;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgba(255, 133, 206, 0.9) 0%,  rgba(255, 105, 150, 0.9) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+
+}
 #login-btn:hover {
     -fx-padding: 7px 28px;
     -fx-text-fill: #bedfff;

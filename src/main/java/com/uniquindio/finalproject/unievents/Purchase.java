@@ -3,10 +3,10 @@ package com.uniquindio.finalproject.unievents;
 public class Purchase {
 
   private final String id;
-  private final String seat;
+  private final Seat seat;
   private final float valuePurchase;
   private final Cupon cupon;
-  private Purchase(String id, String seat, float valuePurchase, Cupon cupon) {
+  private Purchase(String id, Seat seat, float valuePurchase, Cupon cupon) {
     this.id = id;
     this.seat = seat;
     this.valuePurchase = valuePurchase;
@@ -15,7 +15,7 @@ public class Purchase {
 
   public static class PurchaseBuilder {
     private String id;
-    private String seat;
+    private Seat seat;
     private float valuePurchase;
     private Cupon cupon;
 
@@ -24,7 +24,7 @@ public class Purchase {
       return this;
     }
 
-    public PurchaseBuilder seat(String seat) {
+    public PurchaseBuilder seat(Seat seat) {
       this.seat = seat;
       return this;
     }
@@ -51,7 +51,7 @@ public class Purchase {
     return id;
   }
 
-  public String getLocation() {
+  public Seat getLocation() {
     return seat;
   }
 
