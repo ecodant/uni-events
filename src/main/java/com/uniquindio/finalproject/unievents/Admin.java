@@ -26,9 +26,9 @@ public class Admin {
       return instance;
     }
 
-    public Cupon createCupon(CuponType cuponType) throws NoSuchFieldException {
+    public Cupon createCupon(CuponType cuponType, float discountValue, LocalDate dateOfExpiry) throws NoSuchFieldException {
       CuponFactory cuponFactory = new CuponFactory();
-      return cuponFactory.createCupon(cuponType);
+      return cuponFactory.createCupon(cuponType, discountValue, dateOfExpiry);
     }
   
     public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address) {

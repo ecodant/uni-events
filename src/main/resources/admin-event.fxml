@@ -25,23 +25,16 @@
         <items>
             <VBox id="container-white" alignment="CENTER" stylesheets="@css%20sources/style.css">
                <children>
-                  <ImageView fitHeight="176.0" fitWidth="314.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="167.0" fitWidth="556.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/SCREEN05-01.png" />
+                        <Image url="@img/Admin-01.png" />
                      </image>
                   </ImageView>
-                  <HBox>
-                     <children>
-                        <Label id="event-text" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="72.0" stylesheets="@css%20sources/style.css" text="Events" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
+                  <Label id="event-text" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="833.0" stylesheets="@css%20sources/style.css" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                   <TableView fx:id="eventTable" maxHeight="300.0" maxWidth="850.0" prefWidth="850.0">
                     <columns>
                       <TableColumn fx:id="nameColumn" minWidth="20.0" prefWidth="160.0" text="Name" />

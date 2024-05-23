@@ -15,12 +15,15 @@ public class DataUniEvent implements Serializable {
     private final Collection<Event> events;
     private final Collection<City> cities;
     private final Collection<User> users;
+    private final Collection<Cupon> cupons;
+
 
     public DataUniEvent() {
         notificationService = new NotificationService();
         this.events = new LinkedList<>();
         this.cities = new LinkedList<>();
         this.users = new LinkedList<>();
+        this.cupons = new LinkedList<>(); // Initialize the cupon collection
         
     }
 
@@ -72,7 +75,17 @@ public class DataUniEvent implements Serializable {
                                     && e.getDate().equals(event.getDate()) &&  e.getEventType().equals(event.getEventType());
         return events.stream().filter(condition).findAny();
     }
-
+    private Optional<Cupon> verifyCupon(Cupon cupon){
+        Predicate<Cupon> condition = p-> p.equals(cupon);
+        return cupons.stream().filter(condition).findAny();
+    }
+    public void addCupon(Cupon cupon) {
+        if (!verifyCupon(cupon).isPresent()) {
+            cupons.add(cupon);
+        } else {
+            showAlert(AlertType.INFORMATION, "Cupon already exists!", "The cupon is already saved in the system.");
+        }
+    }
     public void updateEvent(Event updatedEvent) {
         for (Event event : events) {
             if (event.equals(updatedEvent)) {
@@ -86,6 +99,14 @@ public class DataUniEvent implements Serializable {
             }
         }
     }
+    // public void updateCupon(Cupon cuponUpdate) {
+    //     for (Cupon cupon : cupons) {
+    //         if (cupon.equals(cuponUpdate)) {
+               
+    //             break;
+    //         }
+    //     }
+    // }
 
     public void initializeMainCities() {
         cities.add(new City("Bogotá"));
@@ -120,11 +141,17 @@ public class DataUniEvent implements Serializable {
     public UniEventIterator<User> getUserIterator() {
         return new UserIterator(users);
     }
+    public UniEventIterator<Cupon> getCuponIterator() {
+        return new CuponIterator(cupons);
+    }
     public UniEventIterator<Event> getEventIterator() {
         return new EventIterator(events);
     }
     public void removeEvent(Event event) {
         events.remove(event);
+    }
+    public void removeCupon(Cupon cupon) {
+        cupons.remove(cupon);
     }
     
     public static DataUniEvent loadFromFile(String filePath) {

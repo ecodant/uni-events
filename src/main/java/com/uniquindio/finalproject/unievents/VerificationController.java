@@ -3,6 +3,8 @@ package com.uniquindio.finalproject.unievents;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import javafx.fxml.FXML;
@@ -26,6 +28,7 @@ public class VerificationController extends BaseController {
     
     private User user = null;
     private DataUniEvent dataUniEvent;
+    UnieventsApplication app;
 
     public VerificationController() {
         // this.dataUniEvent = UnieventsApplication.getDataUniEvent();
@@ -34,7 +37,7 @@ public class VerificationController extends BaseController {
     public void initialize() {
             verificationCode = generateCode();
             user = loadFromFile("D:\\Java Projects\\uni-events\\User_Vefication.ser");
-            UnieventsApplication app = UnieventsApplication.getInstance();
+            app = UnieventsApplication.getInstance();
             app.sendMail(user.getMail(), "Uni-Events Confirmation", generateEmailBody(verificationCode));
     }
 
@@ -48,6 +51,15 @@ public class VerificationController extends BaseController {
         //Spawm System jaja
         NotificationService notification = dataUniEvent.getService();
         notification.subscribe(new EmailMsgListener(user.getMail()));
+        Optional<Cupon> cuponOptinal = user.searchCupon((float)0.15, LocalDate.now());
+        if (cuponOptinal.isPresent()) {
+            Cupon cupon = cuponOptinal.get();
+            String subject = "Registration Coupon Available!";
+            app.sendMail(user.getMail(), subject,  "Dear Customer,\n\nWe are excited to inform you that already has coupon as new member!\n" +
+            "Discount Value: " + cupon.getValue() + "%\n" +
+            "Expiry Date: " + cupon.getDateOfExpiry() + "\n\n" +
+            "Thank you for being with us.\n\nBest Regards,\nUniEvents Team");
+        }
         
         //dataUniEvent.saveToFile("dataUniEvent.ser"); 
         handleSignUpAction();

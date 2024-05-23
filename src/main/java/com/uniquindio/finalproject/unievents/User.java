@@ -1,6 +1,7 @@
 package com.uniquindio.finalproject.unievents;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.function.Predicate;
 import com.uniquindio.finalproject.unievents.Purchase.PurchaseBuilder;
 
 public class User implements Serializable {
-    // private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private final Collection<Cupon> cupons;
     private int ID;
     private String name;
@@ -32,7 +33,8 @@ public class User implements Serializable {
         //Primer cupon de 15% por registro
         CuponFactory cuponFactory = new CuponFactory();
 
-        cupons.add(cuponFactory.createCupon(CuponType.REGISTERED));
+        cupons.add(cuponFactory.createCupon(CuponType.REGISTERED , (float) 0.15, LocalDate.now().plusDays(30)));
+   
     }
     public void rawPurchase(Seat seat, float valuePurchase)  
     {   
@@ -55,6 +57,10 @@ public class User implements Serializable {
         firstCuponValidation();
     }
     
+    public Optional<Cupon> searchCupon(float discountValue, LocalDate dateOfExpiry) {
+        Predicate<Cupon> condition = c -> c.getValue() == discountValue && c.getDateOfExpiry().equals(dateOfExpiry);
+        return cupons.stream().filter(condition).findAny();
+    }
     private Optional<Purchase> verifyCupon(Cupon cupon){
         Predicate<Purchase> condition = p-> p.getCupon().equals(cupon);
         return logPurchase.stream().filter(condition).findAny();
@@ -69,7 +75,7 @@ public class User implements Serializable {
         boolean cuponValidation = cupons.stream().filter(condicion).findAny().isPresent();
         if(!cuponValidation && cupons.size() <= 1) {
             CuponFactory cuponFactory = new CuponFactory();
-            cupons.add(cuponFactory.createCupon(CuponType.FIRST_PURCHASE));
+            cupons.add(cuponFactory.createCupon(CuponType.FIRST_PURCHASE , (float) 0.15, LocalDate.now().plusDays(30)));
         }
     }
     public Collection<Cupon> getCupons() {

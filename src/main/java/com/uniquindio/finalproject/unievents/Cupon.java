@@ -5,7 +5,7 @@ import java.time.LocalDate;
 // import java.util.Date;
 
 public abstract class Cupon implements Serializable{
-
+    private static final long serialVersionUID = 1L;
     private final float discountValue;
     private final LocalDate dateOfExpiry;
     private final LocalDate dateOfEmission;
@@ -33,6 +33,12 @@ public abstract class Cupon implements Serializable{
     public LocalDate getDateOfEmission() {
       return dateOfEmission;
     }
+
+    protected abstract Object getType();
+
+  
+
+   
 
   }
   

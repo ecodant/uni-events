@@ -5,7 +5,11 @@ import java.time.LocalDate;
 
 
 public class CuponRegistered extends Cupon {
-    public CuponRegistered(float discountValue, LocalDate dateOfExpiry, LocalDate dateOfEmission) {
-        super(discountValue, dateOfExpiry, dateOfEmission);  
-      }
+    public CuponRegistered(LocalDate dateOfExpiry, LocalDate dateOfEmission) {
+        super((float)0.15, dateOfExpiry, dateOfEmission);  
+    }
+    @Override
+    protected CuponType getType() {
+      return CuponType.REGISTERED;
+    }
 }

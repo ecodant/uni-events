@@ -182,7 +182,7 @@ public class AdminEventController extends BaseController {
         return (validateField(nameField, "There is something wrong with the Name of the Event") &&
         validateField(descriptionField, "There is something wrong with the Description, so, check it") &&
         validateField(addressField, "There is something wrong with the Andress of the Event") &&
-        validateField(datePicker, "The Date must be provided") &&
+        validateField(datePicker, "The Date must be provided and also the Event needs aleast one week to be created") &&
         validateField(eventType, "The Event Type is necessary"));
     }
     @FXML
@@ -202,37 +202,6 @@ public class AdminEventController extends BaseController {
         return (validatePriceSeat() && validateCapacitySeat() && validateField(seatTypeField, "The Seat Type must be provided"));
     }
 
-    // private void showSeatAddedAnimation() {
-    //     // Create a text node for "Seat Added"
-    //     Text seatAddedText = new Text("Seat Added");
-    //     seatAddedText.setStyle("-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #000000;");
-
-    //     // Add the text node to your layout
-    //     // For example, if you have a VBox named 'root':
-    //     anchorRoot.getChildren().add(seatAddedText);
-
-    //     // Set initial properties
-    //     seatAddedText.setOpacity(0);
-    //     seatAddedText.setTranslateY(-100);
-
-    //     // Create TranslateTransition for Y translation
-    //     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), seatAddedText);
-    //     translateTransition.setToY(0);
-
-    //     // Create FadeTransition for opacity animation
-    //     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), seatAddedText);
-    //     fadeTransition.setFromValue(0);
-    //     fadeTransition.setToValue(1);
-
-    //     // Play both transitions
-    //     translateTransition.play();
-    //     fadeTransition.play();
-
-    //     // Remove the text node after the animation finishes
-    //     fadeTransition.setOnFinished(event -> {
-    //         anchorRoot.getChildren().remove(seatAddedText);
-    //     });
-    // }
 
     public void saveAllDataEvent(ActionEvent e){
         outTransition(sidebar2);
@@ -262,9 +231,9 @@ public class AdminEventController extends BaseController {
         }
         return true;
     }
-
     private boolean validateField(Object field, String errorMessage) {
         boolean isValid = true;
+    
         if (field instanceof TextField) {
             TextField textField = (TextField) field;
             String input = textField.getText();
@@ -278,23 +247,32 @@ public class AdminEventController extends BaseController {
             }
         } else if (field instanceof DatePicker) {
             DatePicker datePicker = (DatePicker) field;
-            if (datePicker.getValue() == null) {
+            if (datePicker.getValue() == null && !(datePicker.getValue().isAfter(LocalDate.now().plusWeeks(15)))) {
                 isValid = false;
             }
-        }
-        else if (field instanceof ChoiceBox) {
+        } else if (field instanceof ChoiceBox) {
             ChoiceBox<?> choiceBox = (ChoiceBox<?>) field;
             if (choiceBox.getValue() == null) {
                 isValid = false;
             }
         }
-
+    
         if (!isValid) {
             showAlert(AlertType.WARNING, "Validation Error", errorMessage);
         }
-
+    
         return isValid;
     }
+    
+    private boolean isDateValid(LocalDate date) {
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+        // Calculate the date 7 weeks from now
+        LocalDate minValidDate = currentDate.plusWeeks(7);
+        // Check if the provided date is after the minimum valid date
+        return date.isAfter(minValidDate);
+    }
+    
   
     @FXML
     private void saveSource() {

@@ -14,12 +14,13 @@ public class EmailMsgListener implements Serializable {
         UnieventsApplication app = UnieventsApplication.getInstance();
         String subject = "";
         String body = "";
-
+        
         if (obj instanceof Cupon) {
             Cupon cupon = (Cupon) obj;
             subject = "New Coupon Available!";
             body = "Dear Customer,\n\nWe are excited to inform you about a new coupon!\n" +
-                   "Discount Value: " + cupon.getValue() + "%\n\n" +
+                   "Discount Value: " + cupon.getValue() + "%\n" +
+                   "Expiry Date: " + cupon.getDateOfExpiry() + "\n\n" +
                    "Thank you for being with us.\n\nBest Regards,\nUniEvents Team";
         } else if (obj instanceof Event) {
             Event event = (Event) obj;
