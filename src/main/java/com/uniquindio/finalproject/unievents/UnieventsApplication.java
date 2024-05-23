@@ -44,7 +44,6 @@ public class UnieventsApplication extends Application{
             if (dataUniEvent == null) {
                 System.out.println("Failed to load data. Initializing new DataUniEvent.");
                 dataUniEvent = new DataUniEvent();
-                dataUniEvent.initializeMainCities();
             } else {
                 // System.out.println(dataUniEvent);
                 System.out.println("Data loaded successfully.");
@@ -53,7 +52,6 @@ public class UnieventsApplication extends Application{
         } else {
 			System.out.println("You're here");
             dataUniEvent = new DataUniEvent();
-            dataUniEvent.initializeMainCities();
         }
 
 		context.getAutowireCapableBeanFactory().autowireBean(this);

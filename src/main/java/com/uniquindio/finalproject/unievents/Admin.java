@@ -31,8 +31,8 @@ public class Admin {
       return cuponFactory.createCupon(cuponType, discountValue, dateOfExpiry);
     }
   
-    public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address) {
-        return new Event(name, description, type, image, date, address);
+    public Event createEvent(String name, String description, EventType type, String image, LocalDate date, String address, String city) {
+        return new Event(name, description, type, image, date, address, city);
     }
 
     public String getUsername() {

@@ -13,7 +13,6 @@ public class DataUniEvent implements Serializable {
     
     private final NotificationService notificationService;
     private final Collection<Event> events;
-    private final Collection<City> cities;
     private final Collection<User> users;
     private final Collection<Cupon> cupons;
 
@@ -21,7 +20,6 @@ public class DataUniEvent implements Serializable {
     public DataUniEvent() {
         notificationService = new NotificationService();
         this.events = new LinkedList<>();
-        this.cities = new LinkedList<>();
         this.users = new LinkedList<>();
         this.cupons = new LinkedList<>(); // Initialize the cupon collection
         
@@ -35,9 +33,6 @@ public class DataUniEvent implements Serializable {
         return notificationService;
     }
 
-    public Collection<City> getCities() {
-        return cities;
-    }
     public Collection<User> getUsers() {
         return users;
     }
@@ -98,27 +93,6 @@ public class DataUniEvent implements Serializable {
                 break;
             }
         }
-    }
-    // public void updateCupon(Cupon cuponUpdate) {
-    //     for (Cupon cupon : cupons) {
-    //         if (cupon.equals(cuponUpdate)) {
-               
-    //             break;
-    //         }
-    //     }
-    // }
-
-    public void initializeMainCities() {
-        cities.add(new City("Bogotá"));
-        cities.add(new City("Medellín"));
-        cities.add(new City("Cali"));
-        cities.add(new City("Barranquilla"));
-        cities.add(new City("Cartagena"));
-        cities.add(new City("Bucaramanga"));
-        cities.add(new City("Pereira"));
-        cities.add(new City("Manizales"));
-        cities.add(new City("Santa Marta"));
-        cities.add(new City("Villavicencio"));
     }
 
     // Serialization method

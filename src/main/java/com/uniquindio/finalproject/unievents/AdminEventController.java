@@ -52,6 +52,8 @@ public class AdminEventController extends BaseController {
     @FXML
     private TextField descriptionField;
     @FXML
+    private TextField cityField;
+    @FXML
     private DatePicker datePicker;
     @FXML
     private TextField addressField;
@@ -95,6 +97,8 @@ public class AdminEventController extends BaseController {
     @FXML
     private TableColumn<Event, String> typeColumn;
     @FXML
+    private TableColumn<Event, String> cityColunm;
+    @FXML
     private TableColumn<Event, String> descriptionColumn;
     @FXML
     private TableColumn<Event, String> addressColumn;
@@ -102,8 +106,11 @@ public class AdminEventController extends BaseController {
     private TableColumn<Event, LocalDate> dateColumn;
     @FXML
     private TableColumn<Event, String> imageColumn;
+    @FXML
+    private CheckBox notificationNew;
     private ObservableList<Event> eventList = FXCollections.observableArrayList();
     private boolean isEditMode = false;
+    // private boolean isEditMode = false;
     private Event event;
     private Event currentEditingEvent;
     @FXML
@@ -114,10 +121,12 @@ public class AdminEventController extends BaseController {
         // dataUniEvent = UnieventsApplication.getDataUniEvent();
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().eventTypeProperty().asString());
+        cityColunm.setCellValueFactory(cellData -> cellData.getValue().cityProperty());
         descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
         addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         imageColumn.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
+
         sidebar.setTranslateY(1000);
         sidebar2.setTranslateY(1000);
         refreshTable();
@@ -133,6 +142,7 @@ public class AdminEventController extends BaseController {
             // Update the existing event
             currentEditingEvent.nameProperty().set(nameField.getText());
             currentEditingEvent.descriptionProperty().set(descriptionField.getText());
+            currentEditingEvent.cityProperty().set(cityField.getText());
             currentEditingEvent.eventTypeProperty().set(eventType.getValue());
             currentEditingEvent.imageProperty().set(filePathLabel.getText());
             currentEditingEvent.dateProperty().set(datePicker.getValue());
@@ -142,12 +152,11 @@ public class AdminEventController extends BaseController {
             isEditMode = false;
         } else {
             // Create a new event
-            event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText());
-            dataUniEvent.newEventPromotion(event);
-            dataUniEvent.addEvent(event);
+            event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText(), cityField.getText());
+            
+           
         }
-    
-        refreshTable();
+
         outTransition(sidebar);
         inTransition(sidebar2);
     }
@@ -160,6 +169,7 @@ public class AdminEventController extends BaseController {
             // Populate the input fields with the selected event's data
             nameField.setText(selectedEvent.getName());
             descriptionField.setText(selectedEvent.getDescription());
+            cityField.setText(selectedEvent.getCity());
             eventType.setValue(selectedEvent.getEventType());
             filePathLabel.setText(selectedEvent.getImage());
             datePicker.setValue(selectedEvent.getDate());
@@ -181,8 +191,8 @@ public class AdminEventController extends BaseController {
     private boolean validateFields() {
         return (validateField(nameField, "There is something wrong with the Name of the Event") &&
         validateField(descriptionField, "There is something wrong with the Description, so, check it") &&
-        validateField(addressField, "There is something wrong with the Andress of the Event") &&
-        validateField(datePicker, "The Date must be provided and also the Event needs aleast one week to be created") &&
+        validateField(cityField, "There something wrong with the City field, the city can't be just numbers") &&
+        validDateEvent() && validateField(addressField, "There is something wrong with the Andress of the Event") &&
         validateField(eventType, "The Event Type is necessary"));
     }
     @FXML
@@ -193,11 +203,12 @@ public class AdminEventController extends BaseController {
         }
 
         event.addSeat(Float.parseFloat(priceField.getText()), Short.parseShort(capacityField.getText()), seatTypeField.getValue());
-        // dataUniEvent.addEvent(event);
-        // outTransition(sidebar2);
-        // showSeatAddedAnimation();
-    }
+        priceField.setText("");
+        seatTypeField.setValue(null);
+        capacityField.setText("");
 
+    }
+    
     private boolean validateSeatFields() {
         return (validatePriceSeat() && validateCapacitySeat() && validateField(seatTypeField, "The Seat Type must be provided"));
     }
@@ -206,7 +217,10 @@ public class AdminEventController extends BaseController {
     public void saveAllDataEvent(ActionEvent e){
         outTransition(sidebar2);
         // outTransition(sidebar);
-    
+        if (notificationNew.isSelected()) {
+            // System.out.println("Notification Acitived");
+            dataUniEvent.newEventPromotion(event);
+        }
         dataUniEvent.addEvent(event);
         refreshTable();
     }
@@ -245,11 +259,6 @@ public class AdminEventController extends BaseController {
             if (input.isEmpty() || !containsLetters) {
                 isValid = false;
             }
-        } else if (field instanceof DatePicker) {
-            DatePicker datePicker = (DatePicker) field;
-            if (datePicker.getValue() == null && !(datePicker.getValue().isAfter(LocalDate.now().plusWeeks(15)))) {
-                isValid = false;
-            }
         } else if (field instanceof ChoiceBox) {
             ChoiceBox<?> choiceBox = (ChoiceBox<?>) field;
             if (choiceBox.getValue() == null) {
@@ -264,13 +273,15 @@ public class AdminEventController extends BaseController {
         return isValid;
     }
     
-    private boolean isDateValid(LocalDate date) {
-        // Get the current date
-        LocalDate currentDate = LocalDate.now();
-        // Calculate the date 7 weeks from now
-        LocalDate minValidDate = currentDate.plusWeeks(7);
-        // Check if the provided date is after the minimum valid date
-        return date.isAfter(minValidDate);
+    private boolean validDateEvent() {
+        if (datePicker.getValue() != null && datePicker.getValue().isAfter(LocalDate.now().plusWeeks(2))){
+            return true;
+        }
+        else {
+            showAlert(AlertType.WARNING, "Validation Error", "The Date must be provided and also the Event needs aleast one week to be created");
+        }
+
+        return false;
     }
     
   
@@ -293,9 +304,26 @@ public class AdminEventController extends BaseController {
         }
     }
     public void cancelEditor1(ActionEvent e){
+        nameField.setText("");
+        descriptionField.setText("");
+        cityField.setText("");
+        eventType.setValue(null);
+        filePathLabel.setText("");
+        datePicker.setValue(null);
+        addressField.setText("");
         outTransition(sidebar);
     }
     public void cancelEditor2(ActionEvent e){
+        nameField.setText("");
+        descriptionField.setText("");
+        cityField.setText("");
+        eventType.setValue(null);
+        filePathLabel.setText("");
+        datePicker.setValue(null);
+        addressField.setText("");
+        priceField.setText("");
+        seatTypeField.setValue(null);
+        capacityField.setText("");
         outTransition(sidebar2);
     }
     //Show methods

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -116,6 +117,12 @@
                               </DatePicker>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <CheckBox fx:id="notificationNew" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Notificate Users" />
+                           </children>
+                        </HBox>
+                        <Label id="dialog-Text" contentDisplay="CENTER" layoutX="22.0" layoutY="111.0" prefHeight="28.0" prefWidth="154.0" stylesheets="@css%20sources/sidebar_Styles.css" text="New Cupon" GridPane.rowIndex="3" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="10.0" top="12.0" />

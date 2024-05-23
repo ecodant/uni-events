@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Optional;
-import java.util.function.Predicate;
+
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -22,15 +21,17 @@ public class Event implements Serializable {
     private transient SimpleStringProperty image;
     private transient SimpleObjectProperty<LocalDate> date;
     private transient SimpleStringProperty address;
+    private transient SimpleStringProperty city;
     private Collection<Seat> seats;
 
-    public Event(String name, String description, EventType eventType, String image, LocalDate date, String address) {
+    public Event(String name, String description, EventType eventType, String image, LocalDate date, String address, String city) {
         this.name = new SimpleStringProperty(name);
         this.description = new SimpleStringProperty(description);
         this.eventType = new SimpleObjectProperty<>(eventType);
         this.image = new SimpleStringProperty(image);
         this.date = new SimpleObjectProperty<>(date);
         this.address = new SimpleStringProperty(address);
+        this.city = new SimpleStringProperty(city);
         this.seats = new LinkedList<>();;
     }
 
@@ -40,6 +41,7 @@ public class Event implements Serializable {
     public SimpleStringProperty imageProperty() { return image; }
     public SimpleObjectProperty<LocalDate> dateProperty() { return date; }
     public SimpleStringProperty addressProperty() { return address; }
+    public SimpleStringProperty cityProperty() { return city; }
 
     // Standard getter methods for serialization
     public String getName() { return name.get(); }
@@ -48,6 +50,7 @@ public class Event implements Serializable {
     public String getImage() { return image.get(); }
     public LocalDate getDate() { return date.get(); }
     public String getAddress() { return address.get(); }
+    public String getCity() { return city.get(); }
     public Collection<Seat> getSeats() { return seats; }
     
     public void addSeat(float price, short capacity, SeatType seatType) {
@@ -63,6 +66,7 @@ public class Event implements Serializable {
         oos.writeObject(getImage());
         oos.writeObject(getDate());
         oos.writeObject(getAddress());
+        oos.writeObject(getCity());
     }
 
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
@@ -73,5 +77,6 @@ public class Event implements Serializable {
         image = new SimpleStringProperty((String) ois.readObject());
         date = new SimpleObjectProperty<>((LocalDate) ois.readObject());
         address = new SimpleStringProperty((String) ois.readObject());
+        city = new SimpleStringProperty((String) ois.readObject());
     }
 }

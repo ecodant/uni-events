@@ -58,6 +58,8 @@ public class AdminCuponController extends BaseController {
     //Transition Anchor
     @FXML
     private AnchorPane anchorRoot;
+    @FXML
+    private CheckBox notificationNew;
 
     //Table Variables!
     @FXML
@@ -97,7 +99,10 @@ public class AdminCuponController extends BaseController {
         Cupon cupon = admin.createCupon(cuponType.getValue(), Float.parseFloat(discountField.getText()), dateCupon.getValue());
         //Cupones en circulación
         dataUniEvent.addCupon(cupon);
-        dataUniEvent.newEventPromotion(cupon);
+        
+        if (notificationNew.isSelected()) {
+            dataUniEvent.newEventPromotion(cupon);
+        }
         refreshTable();
 
         outTransition(sidebar);
