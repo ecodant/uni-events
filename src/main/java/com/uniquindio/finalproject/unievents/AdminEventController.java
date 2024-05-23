@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.DirectoryChooser;
+// import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -23,7 +23,6 @@ import com.gluonhq.charm.glisten.control.Icon;
 // import ch.qos.logback.core.util.Duration;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -31,7 +30,7 @@ import java.util.Optional;
 // import javafx.animation.TranslateTransition;
 
 
-public class AdminPanelController extends BaseController {
+public class AdminEventController extends BaseController {
     private DataUniEvent dataUniEvent;
     //Btn Event Editor
     @FXML
@@ -103,9 +102,10 @@ public class AdminPanelController extends BaseController {
     private TableColumn<Event, LocalDate> dateColumn;
     @FXML
     private TableColumn<Event, String> imageColumn;
-    private Event event;
     private ObservableList<Event> eventList = FXCollections.observableArrayList();
-    
+    private boolean isEditMode = false;
+    private Event event;
+    private Event currentEditingEvent;
     @FXML
     public void initialize() {
         dataUniEvent = UnieventsApplication.getDataUniEvent();
@@ -125,15 +125,58 @@ public class AdminPanelController extends BaseController {
     public void showEventEditor(){
         inTransition(sidebar);
     }
-    public void saveInforEventEditor(ActionEvent e){
+    public void saveInforEventEditor(ActionEvent e) {
         Admin admin = Admin.getInstance();
-        if(!validateFields()) return;
-        System.out.println("Yeah all is good");
+        if (!validateFields()) return;
+        
+        if (isEditMode) {
+            // Update the existing event
+            currentEditingEvent.nameProperty().set(nameField.getText());
+            currentEditingEvent.descriptionProperty().set(descriptionField.getText());
+            currentEditingEvent.eventTypeProperty().set(eventType.getValue());
+            currentEditingEvent.imageProperty().set(filePathLabel.getText());
+            currentEditingEvent.dateProperty().set(datePicker.getValue());
+            currentEditingEvent.addressProperty().set(addressField.getText());
+    
+            dataUniEvent.updateEvent(currentEditingEvent); // Update the event in the data source
+            isEditMode = false;
+        } else {
+            // Create a new event
+            event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText());
+            dataUniEvent.addEvent(event);
+        }
+    
+        refreshTable();
         outTransition(sidebar);
-        event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText());
         inTransition(sidebar2);
-
     }
+    
+
+    @FXML
+    private void handleEdit(ActionEvent event) {
+        Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
+        if (selectedEvent != null) {
+            // Populate the input fields with the selected event's data
+            nameField.setText(selectedEvent.getName());
+            descriptionField.setText(selectedEvent.getDescription());
+            eventType.setValue(selectedEvent.getEventType());
+            filePathLabel.setText(selectedEvent.getImage());
+            datePicker.setValue(selectedEvent.getDate());
+            addressField.setText(selectedEvent.getAddress());
+
+            // Set edit mode
+            isEditMode = true;
+            currentEditingEvent = selectedEvent;
+
+            // Show the event editor with the populated fields
+            showEventEditor();
+        } else {
+            // If no item is selected, show an alert
+            showAlert(AlertType.WARNING, "No Selection", "Please select an event to edit.");
+        }
+    }
+
+
     private boolean validateFields() {
         return (validateField(nameField, "There is something wrong with the Name of the Event") &&
         validateField(descriptionField, "There is something wrong with the Description, so, check it") &&
@@ -336,7 +379,7 @@ public class AdminPanelController extends BaseController {
     }
 
     public void backHome(ActionEvent event){
-        handleSignUpAction("/startup-UI.fxml");
+        handleSignUpAction("/admin-home.fxml");
     }
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

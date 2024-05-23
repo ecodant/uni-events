@@ -72,7 +72,21 @@ public class DataUniEvent implements Serializable {
                                     && e.getDate().equals(event.getDate()) &&  e.getEventType().equals(event.getEventType());
         return events.stream().filter(condition).findAny();
     }
-    // Initialize main cities
+
+    public void updateEvent(Event updatedEvent) {
+        for (Event event : events) {
+            if (event.equals(updatedEvent)) {
+                event.nameProperty().set(updatedEvent.getName());
+                event.descriptionProperty().set(updatedEvent.getDescription());
+                event.eventTypeProperty().set(updatedEvent.getEventType());
+                event.imageProperty().set(updatedEvent.getImage());
+                event.dateProperty().set(updatedEvent.getDate());
+                event.addressProperty().set(updatedEvent.getAddress());
+                break;
+            }
+        }
+    }
+
     public void initializeMainCities() {
         cities.add(new City("Bogotá"));
         cities.add(new City("Medellín"));

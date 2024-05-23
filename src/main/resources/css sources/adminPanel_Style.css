@@ -1,0 +1,19 @@
+#header-text{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-text-fill: #5a5757;
+    -fx-font-size: 26px;
+    -fx-aligment:center;
+    -fx-font-weight: bold;
+}
+#edit-btn {
+    -fx-aligment:center;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgba(99, 198, 225, 0.9) 0%,  rgba(57, 205, 234, 0.9) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+
+}

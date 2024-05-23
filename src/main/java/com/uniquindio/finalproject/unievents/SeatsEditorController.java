@@ -134,7 +134,7 @@ public class SeatsEditorController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin-panel.fxml"));
             AnchorPane adminPane = loader.load();
-            AdminPanelController adminPanelController = loader.getController();
+            AdminEventController adminPanelController = loader.getController();
             adminPanelController.refreshTable();
         } catch (IOException e) {
             e.printStackTrace();

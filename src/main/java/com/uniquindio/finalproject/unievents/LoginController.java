@@ -40,7 +40,7 @@ public class LoginController extends BaseController {
         System.out.println(passwordField.getText());
         System.out.println(mailField.getText());
         if (passwordField.getText().equals("admin") && mailField.getText().equals("admin@unieventos.com")) {
-            handleSignUpAction("/admin-panel.fxml");
+            handleSignUpAction("/admin-home.fxml");
         } else {
             Optional<User> userOptional = dataUniEvent.loginChecker(passwordField.getText(), mailField.getText());
             if (userOptional.isPresent()) {
