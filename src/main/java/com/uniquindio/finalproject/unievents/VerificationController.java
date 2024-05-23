@@ -45,6 +45,10 @@ public class VerificationController extends BaseController {
         };        
         DataUniEvent dataUniEvent = UnieventsApplication.getDataUniEvent();
         dataUniEvent.addUser(user);
+        //Spawm System jaja
+        NotificationService notification = dataUniEvent.getService();
+        notification.subscribe(new EmailMsgListener(user.getMail()));
+        
         //dataUniEvent.saveToFile("dataUniEvent.ser"); 
         handleSignUpAction();
     }

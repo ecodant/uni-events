@@ -143,6 +143,7 @@ public class AdminEventController extends BaseController {
         } else {
             // Create a new event
             event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText());
+            dataUniEvent.newEventPromotion(event);
             dataUniEvent.addEvent(event);
         }
     
@@ -194,44 +195,44 @@ public class AdminEventController extends BaseController {
         event.addSeat(Float.parseFloat(priceField.getText()), Short.parseShort(capacityField.getText()), seatTypeField.getValue());
         // dataUniEvent.addEvent(event);
         // outTransition(sidebar2);
-        showSeatAddedAnimation();
+        // showSeatAddedAnimation();
     }
 
     private boolean validateSeatFields() {
         return (validatePriceSeat() && validateCapacitySeat() && validateField(seatTypeField, "The Seat Type must be provided"));
     }
 
-    private void showSeatAddedAnimation() {
-        // Create a text node for "Seat Added"
-        Text seatAddedText = new Text("Seat Added");
-        seatAddedText.setStyle("-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #000000;");
+    // private void showSeatAddedAnimation() {
+    //     // Create a text node for "Seat Added"
+    //     Text seatAddedText = new Text("Seat Added");
+    //     seatAddedText.setStyle("-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #000000;");
 
-        // Add the text node to your layout
-        // For example, if you have a VBox named 'root':
-        anchorRoot.getChildren().add(seatAddedText);
+    //     // Add the text node to your layout
+    //     // For example, if you have a VBox named 'root':
+    //     anchorRoot.getChildren().add(seatAddedText);
 
-        // Set initial properties
-        seatAddedText.setOpacity(0);
-        seatAddedText.setTranslateY(-100);
+    //     // Set initial properties
+    //     seatAddedText.setOpacity(0);
+    //     seatAddedText.setTranslateY(-100);
 
-        // Create TranslateTransition for Y translation
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), seatAddedText);
-        translateTransition.setToY(0);
+    //     // Create TranslateTransition for Y translation
+    //     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), seatAddedText);
+    //     translateTransition.setToY(0);
 
-        // Create FadeTransition for opacity animation
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), seatAddedText);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
+    //     // Create FadeTransition for opacity animation
+    //     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), seatAddedText);
+    //     fadeTransition.setFromValue(0);
+    //     fadeTransition.setToValue(1);
 
-        // Play both transitions
-        translateTransition.play();
-        fadeTransition.play();
+    //     // Play both transitions
+    //     translateTransition.play();
+    //     fadeTransition.play();
 
-        // Remove the text node after the animation finishes
-        fadeTransition.setOnFinished(event -> {
-            anchorRoot.getChildren().remove(seatAddedText);
-        });
-    }
+    //     // Remove the text node after the animation finishes
+    //     fadeTransition.setOnFinished(event -> {
+    //         anchorRoot.getChildren().remove(seatAddedText);
+    //     });
+    // }
 
     public void saveAllDataEvent(ActionEvent e){
         outTransition(sidebar2);

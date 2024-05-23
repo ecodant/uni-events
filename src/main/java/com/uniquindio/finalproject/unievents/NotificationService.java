@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationService implements Serializable {
-    // private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private final List<EmailMsgListener> customers;
 
     public NotificationService(){
@@ -19,7 +19,7 @@ public class NotificationService implements Serializable {
         customers.remove(listener);
     }
 
-    public void notifyClient() {
-        customers.forEach(listener -> listener.update());
+    public void notifyClient(Object obj) {
+        customers.forEach(listener -> listener.update(obj));
     }
 }

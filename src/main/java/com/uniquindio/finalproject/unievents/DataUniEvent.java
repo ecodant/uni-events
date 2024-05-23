@@ -24,8 +24,8 @@ public class DataUniEvent implements Serializable {
         
     }
 
-    public void newEventPromotion() {
-        notificationService.notifyClient();
+    public void newEventPromotion(Object obj) {
+        notificationService.notifyClient(obj);
     }
 
     public NotificationService getService() {
@@ -53,7 +53,7 @@ public class DataUniEvent implements Serializable {
         if(!verifyEvent(event).isPresent()){
             events.add(event);
         }
-        else showAlert(AlertType.INFORMATION, "The Event is already created!", "Please created a new one");
+        // else showAlert(AlertType.INFORMATION, "The Event is already created!", "Please created a new one");
         
     }
      private void showAlert(AlertType alertType, String title, String message) {
