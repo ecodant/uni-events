@@ -139,7 +139,6 @@ public class AdminEventController extends BaseController {
         if (!validateFields()) return;
         
         if (isEditMode) {
-            // Update the existing event
             currentEditingEvent.nameProperty().set(nameField.getText());
             currentEditingEvent.descriptionProperty().set(descriptionField.getText());
             currentEditingEvent.cityProperty().set(cityField.getText());
@@ -148,12 +147,10 @@ public class AdminEventController extends BaseController {
             currentEditingEvent.dateProperty().set(datePicker.getValue());
             currentEditingEvent.addressProperty().set(addressField.getText());
     
-            dataUniEvent.updateEvent(currentEditingEvent); // Update the event in the data source
+            dataUniEvent.updateEvent(currentEditingEvent); 
             isEditMode = false;
         } else {
-            // Create a new event
-            event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText(), cityField.getText());
-            
+            event = admin.createEvent(nameField.getText(), descriptionField.getText(), eventType.getValue(), filePathLabel.getText(), datePicker.getValue(), addressField.getText(), cityField.getText()); 
            
         }
 
@@ -166,7 +163,7 @@ public class AdminEventController extends BaseController {
     private void handleEdit(ActionEvent event) {
         Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
-            // Populate the input fields with the selected event's data
+
             nameField.setText(selectedEvent.getName());
             descriptionField.setText(selectedEvent.getDescription());
             cityField.setText(selectedEvent.getCity());
@@ -175,14 +172,13 @@ public class AdminEventController extends BaseController {
             datePicker.setValue(selectedEvent.getDate());
             addressField.setText(selectedEvent.getAddress());
 
-            // Set edit mode
             isEditMode = true;
             currentEditingEvent = selectedEvent;
 
-            // Show the event editor with the populated fields
+
             showEventEditor();
         } else {
-            // If no item is selected, show an alert
+
             showAlert(AlertType.WARNING, "No Selection", "Please select an event to edit.");
         }
     }
@@ -252,9 +248,7 @@ public class AdminEventController extends BaseController {
             TextField textField = (TextField) field;
             String input = textField.getText();
             
-            // Check if the input contains both letters and numbers
             boolean containsLetters = input.matches(".*[a-zA-Z]+.*");
-            // boolean containsNumbers = input.matches(".*\\d+.*");
     
             if (input.isEmpty() || !containsLetters) {
                 isValid = false;
@@ -291,10 +285,8 @@ public class AdminEventController extends BaseController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File Path");
 
-        // Set the initial directory (optional)
         fileChooser.setInitialDirectory(new java.io.File(System.getProperty("user.home")));
 
-        // Open the file chooser dialog
         Window primaryStage = filePathLabel.getScene().getWindow();
         java.io.File file = fileChooser.showSaveDialog(primaryStage);
 
@@ -331,16 +323,16 @@ public class AdminEventController extends BaseController {
     //Show methods
     @FXML
     private void inTransition(VBox element) {
-        // Animate the sidebar to slide in
+
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), element);
-        transition.setToY(0); // Move to the original position
+        transition.setToY(0); 
         element.setVisible(true);
         transition.play();
     }
    
     private void outTransition(VBox element) {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), element);
-        transition.setToY(-1000); // Move off the screen
+        transition.setToY(-1000); 
         element.setVisible(true);
         transition.play();
 
@@ -364,7 +356,7 @@ public class AdminEventController extends BaseController {
     public void handleDelete(ActionEvent event) {
         Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
-            // Confirmation dialog before deleting
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Delete Event");
@@ -374,11 +366,11 @@ public class AdminEventController extends BaseController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 // Remove the selected event from the data source
                 dataUniEvent.removeEvent(selectedEvent);
-                eventList.remove(selectedEvent); // Remove from the observable list
-                eventTable.refresh(); // Refresh the table view
+                eventList.remove(selectedEvent); 
+                eventTable.refresh(); 
             }
         } else {
-            // If no item is selected, show an alert
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Event Selected");

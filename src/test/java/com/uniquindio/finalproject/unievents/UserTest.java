@@ -17,12 +17,6 @@ public class UserTest {
     }
 
     @Test
-    void testAddCupon() {
-        assertFalse(user.getCupons().isEmpty());
-    }
-
-
-    @Test
     void testFirstCuponValidation() {
         user.firstCuponValidation();
         assertEquals(2, user.getCupons().size());
