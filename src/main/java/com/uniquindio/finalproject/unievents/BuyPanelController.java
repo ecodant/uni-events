@@ -77,7 +77,6 @@ public class BuyPanelController extends BaseController {
         dataUniEvent = UnieventsApplication.getDataUniEvent();
         sidebar.setTranslateX(1200);
         
-        // Initialize choice boxes
         // cityField.getItems().setAll("Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Bucaramanga", "Pereira", "Manizales", "Santa Marta", "Villavicencio");
         typeField.getItems().setAll(EventType.FESTIVAL,EventType.CONCERT, EventType.THEATER,
              EventType.SPORT, EventType.OTHER, null);
@@ -222,10 +221,10 @@ public class BuyPanelController extends BaseController {
         String msg = "Dear Customer,\n\n" +
             "This email confirms your recent purchase at UniEvents.\n\n" +
             "Purchase Details:\n" +
-            purchase.getLocation()+"\n" +
-            purchase.getValuePurchase() +
+            "The Location was: " +purchase.getLocation()+"\n" +
+            "The total of the purchase was: "+purchase.getValuePurchase() +
             "\n" +
-            "We hope you enjoy your upcoming event! If you have any questions, please don't hesitate to contact us.\n\n" +
+            "Also attached is the QR with purchase ID, so, We hope you enjoy your upcoming event! If you have any questions, please don't hesitate to contact us.\n\n" +
             "Best regards,\n" +
             "UniEvents Team";
         

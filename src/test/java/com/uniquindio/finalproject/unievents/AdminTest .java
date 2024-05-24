@@ -36,5 +36,4 @@ class AdminTest {
         assertEquals(city, event.getCity());
     }
 
-    // Add more test cases as needed
 }

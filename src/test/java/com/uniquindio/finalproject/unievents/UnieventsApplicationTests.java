@@ -1,17 +1,16 @@
 package com.uniquindio.finalproject.unievents;
 import static org.mockito.Mockito.*;
 
-import java.io.IOException;
+
 
 
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.google.zxing.WriterException;
+
 
 @SpringBootTest
 class UnieventsApplicationTests {
