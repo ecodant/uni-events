@@ -23,7 +23,6 @@ class UnieventsApplicationTests {
 
     @Test
     void testSendMail() {
-        // Setup
         String mail = "example@example.com";
         String subject = "Test Subject";
         String body = "Test Body";

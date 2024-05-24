@@ -13,7 +13,7 @@ public class UserTest {
 
     @BeforeEach
     void setUp() {
-        user = new User(1, "John", "Doe", "123456789", "john.doe@example.com", "password123");
+        user = new User(1234, "Juanda", "Gordillo", "123456789", "juandolopeor@gmail.com", "mypassword");
     }
 
     @Test

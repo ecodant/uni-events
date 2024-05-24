@@ -11,20 +11,17 @@ class PurchaseTest {
         SeatType seat = SeatType.CONCERT;
         float valuePurchase = 50.0f;
 
-        // Create a Purchase using the PurchaseBuilder
         Purchase purchase = new Purchase.PurchaseBuilder()
                                     .idBill(id)
                                     .seat(seat)
                                     .valuePurchase(valuePurchase)
                                     .build();
 
-        // Verify the Purchase object
         assertNotNull(purchase);
         assertEquals(id, purchase.getId());
         assertEquals(seat, purchase.getLocation());
         assertEquals(valuePurchase, purchase.getValuePurchase());
 
-        // Test with invalid parameters
         assertThrows(IllegalArgumentException.class, () -> {
             new Purchase.PurchaseBuilder()
                 .idBill(null)
