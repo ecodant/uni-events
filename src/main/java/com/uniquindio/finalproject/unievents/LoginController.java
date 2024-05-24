@@ -54,13 +54,17 @@ public class LoginController extends BaseController {
             }
         }
     }
-
+    public void backHome(ActionEvent event){
+        handleSignUpAction("/startup-UI.fxml");
+    }
     private void moveToProfile(User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile-screen.fxml"));
         Parent root = loader.load();
         
         ProfileController profileController = loader.getController();
         profileController.setUserData(user);
+        System.out.println("User passed to the next FXML");
+        profileController.setUser(user);
 
         Scene scene = anchorRoot.getScene();
         StackPane container = (StackPane) scene.getRoot();

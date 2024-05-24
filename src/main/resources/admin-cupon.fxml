@@ -80,7 +80,7 @@
             <VBox id="editor-container" alignment="CENTER" maxWidth="550.0" prefHeight="361.0" prefWidth="555.0">
                <children>
                   <Label id="info-text" alignment="CENTER" prefHeight="56.0" prefWidth="491.0" text="Define the values for the Cupon" />
-                  <GridPane alignment="CENTER" depthTest="ENABLE" maxHeight="300.0" maxWidth="450.0" minHeight="188.0" minWidth="450.0" prefHeight="188.0" prefWidth="450.0">
+                  <GridPane alignment="CENTER" depthTest="ENABLE" maxHeight="300.0" maxWidth="450.0" minHeight="188.0" minWidth="450.0" prefHeight="203.0" prefWidth="450.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="175.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.0" minWidth="10.0" prefWidth="303.0" />
@@ -92,7 +92,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="discountField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField id="standard-field-input" fx:id="discountField" stylesheets="@css%20sources/adminPanel_Style.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
@@ -102,15 +102,16 @@
                         <Label id="dialog-Text" contentDisplay="CENTER" layoutX="10.0" layoutY="117.0" prefHeight="25.0" prefWidth="135.0" stylesheets="@css%20sources/sidebar_Styles.css" text="Cupon Type" />
                         <HBox alignment="CENTER" GridPane.columnIndex="1">
                            <children>
-                              <ChoiceBox fx:id="cuponType" prefHeight="26.0" prefWidth="225.0">
+                              <ChoiceBox id="standard-choice-menu" fx:id="cuponType" maxWidth="185.0" minWidth="188.0" prefHeight="26.0" prefWidth="185.0" stylesheets="@css%20sources/adminPanel_Style.css">
                                  <HBox.margin>
                                     <Insets left="40.0" right="40.0" />
-                                 </HBox.margin></ChoiceBox>
+                                 </HBox.margin>
+                              </ChoiceBox>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="172.0" layoutY="22.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <DatePicker fx:id="dateCupon" prefHeight="26.0" prefWidth="225.0">
+                              <DatePicker id="standard-field-input" fx:id="dateCupon" prefHeight="26.0" prefWidth="225.0" stylesheets="@css%20sources/adminPanel_Style.css">
                                  <HBox.margin>
                                     <Insets left="40.0" right="40.0" />
                                  </HBox.margin>
@@ -119,7 +120,7 @@
                         </HBox>
                         <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <CheckBox fx:id="notificationNew" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Notificate Users" />
+                              <CheckBox id="checkbox-wrapper-13" fx:id="notificationNew" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" stylesheets="@css%20sources/adminPanel_Style.css" text="Notificate Users" />
                            </children>
                         </HBox>
                         <Label id="dialog-Text" contentDisplay="CENTER" layoutX="22.0" layoutY="111.0" prefHeight="28.0" prefWidth="154.0" stylesheets="@css%20sources/sidebar_Styles.css" text="New Cupon" GridPane.rowIndex="3" />

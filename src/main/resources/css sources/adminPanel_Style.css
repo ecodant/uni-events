@@ -6,6 +6,7 @@
     -fx-aligment:center;
     -fx-font-weight: bold;
 }
+
 #edit-btn {
     -fx-aligment:center;
     -fx-font-size: 16px;
@@ -17,3 +18,25 @@
     -fx-font-weight: bold;
 
 }
+#standard-choice-menu{
+    -fx-background-color: rgb(192, 218, 255);
+}
+#standard-field-input{
+    /* -fx-max-width: 100px; */
+    -fx-font-size: 14px;
+    -fx-border-width: 0px;
+    -fx-border-color: #cccccc;
+    -fx-background-color: #effbff;
+    -fx-text-fill: #c4c4c4;
+    -fx-border-style: solid;
+    -fx-border-radius: 0px;
+    -fx-effect: dropshadow(three-pass-box, rgba(66,66,66,.5), 2, 0, 0, 0);
+    -fx-border-insets: 6px;
+    -fx-background-insets: 6px;
+}
+#checkbox-wrapper-13 {
+    -fx-appearance: none;  /* Remove default checkbox appearance */
+    -fx-pref-height: 21px;  /* Set preferred height */
+    -fx-cursor: hand;  /* Set cursor to pointer on hover */
+    
+  }

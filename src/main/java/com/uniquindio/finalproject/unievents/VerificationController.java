@@ -3,8 +3,7 @@ package com.uniquindio.finalproject.unievents;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.time.LocalDate;
-import java.util.Optional;
+
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import javafx.fxml.FXML;
@@ -24,19 +23,16 @@ public class VerificationController extends BaseController {
     private TextField labelValidation;
     
     @Autowired
-    private EmailSenderService senderService;  // Inject EmailSenderService
+    private EmailSenderService senderService; 
     
     private User user = null;
     private DataUniEvent dataUniEvent;
     UnieventsApplication app;
 
-    public VerificationController() {
-        // this.dataUniEvent = UnieventsApplication.getDataUniEvent();
-    }
     
     public void initialize() {
             verificationCode = generateCode();
-            user = loadFromFile("D:\\Java Projects\\uni-events\\User_Vefication.ser");
+            user = loadFromFile("User_Vefication.ser");
             app = UnieventsApplication.getInstance();
             app.sendMail(user.getMail(), "Uni-Events Confirmation", generateEmailBody(verificationCode));
     }
@@ -51,23 +47,24 @@ public class VerificationController extends BaseController {
         //Spawm System jaja
         NotificationService notification = dataUniEvent.getService();
         notification.subscribe(new EmailMsgListener(user.getMail()));
-        Optional<Cupon> cuponOptinal = user.searchCupon((float)0.15, LocalDate.now());
-        if (cuponOptinal.isPresent()) {
-            Cupon cupon = cuponOptinal.get();
-            String subject = "Registration Coupon Available!";
-            app.sendMail(user.getMail(), subject,  "Dear Customer,\n\nWe are excited to inform you that already has coupon as new member!\n" +
-            "Discount Value: " + cupon.getValue() + "%\n" +
-            "Expiry Date: " + cupon.getDateOfExpiry() + "\n\n" +
-            "Thank you for being with us.\n\nBest Regards,\nUniEvents Team");
-        }
+
+        app.sendMail(user.getMail(), "Congratulations! You won a 15% discount at UniEventos!",  "Dear User,\n\n" +
+
+        "Congratulations! You've just won a 15% discount on your next UniEventos purchase!\n\n" +  
         
-        //dataUniEvent.saveToFile("dataUniEvent.ser"); 
+        "To redeem your discount, simply head over to the 'Get Tickets' section and browse through our available events. When you're ready to purchase your tickets, the 15% discount will be automatically applied at checkout.\n\n" +  
+        
+        "No need to enter any codes, the discount is yours to enjoy! Happy shopping!\n\n" +
+        
+        "Best regards,\n" +
+        
+        "UniEventos Team");
+         
         handleSignUpAction();
     }
     
     private void handleSignUpAction() {
         try {
-                // Get the controller and pass the user I
             transitionScene(anchorRoot, "/signIn-UI.fxml");
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,17 +103,7 @@ public class VerificationController extends BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    // public User loadUser(String filePath) {
-    //     try (FileInputStream fileIn = new FileInputStream(filePath);
-    //          ObjectInputStream in = new ObjectInputStream(fileIn)) {
-    //         User user = (User) in.readObject();
-    //         System.out.println("User data loaded successfully.");
-    //         return user;
-    //     } catch (IOException | ClassNotFoundException e) {
-    //         System.out.println("Error loading user data: " + e.getMessage());
-    //         return null;
-    //     }
-    // }
+
     private User loadFromFile(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             return (User) in.readObject();

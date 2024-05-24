@@ -201,7 +201,7 @@ public class AdminEventController extends BaseController {
         if (!validateSeatFields()) {
             return;
         }
-
+        System.err.println("The event could be null: "+event);
         event.addSeat(Float.parseFloat(priceField.getText()), Short.parseShort(capacityField.getText()), seatTypeField.getValue());
         priceField.setText("");
         seatTypeField.setValue(null);
@@ -304,26 +304,28 @@ public class AdminEventController extends BaseController {
         }
     }
     public void cancelEditor1(ActionEvent e){
-        nameField.setText("");
-        descriptionField.setText("");
-        cityField.setText("");
+        nameField.clear();
+        descriptionField.clear();
+        cityField.clear();
         eventType.setValue(null);
         filePathLabel.setText("");
         datePicker.setValue(null);
-        addressField.setText("");
+        addressField.clear();
+        
         outTransition(sidebar);
     }
     public void cancelEditor2(ActionEvent e){
-        nameField.setText("");
-        descriptionField.setText("");
-        cityField.setText("");
+        nameField.clear();
+        descriptionField.clear();
+        cityField.clear();
         eventType.setValue(null);
         filePathLabel.setText("");
         datePicker.setValue(null);
-        addressField.setText("");
-        priceField.setText("");
+        addressField.clear();
+        priceField.clear();
         seatTypeField.setValue(null);
-        capacityField.setText("");
+        capacityField.clear();
+
         outTransition(sidebar2);
     }
     //Show methods

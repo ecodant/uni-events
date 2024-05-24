@@ -7,7 +7,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
-
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -79,4 +82,25 @@ public class Event implements Serializable {
         address = new SimpleStringProperty((String) ois.readObject());
         city = new SimpleStringProperty((String) ois.readObject());
     }
+    public List<SeatType> getAvailableSeatTypes() {
+        return seats.stream()
+                    .map(Seat::getSeatType)
+                    .distinct()
+                    .collect(Collectors.toList());
+    }
+    public void updateSeat(Seat seatUpdate) {
+        for (Seat seat : seats) {
+            if (seat.equals(seatUpdate)) {
+                seat.setCapacity(seatUpdate.getCapacity());
+                break;
+            }
+        }
+    }
+    
+    public Optional<Seat> getAvailableSeat(SeatType seatType) {
+        return seats.stream()
+                    .filter(seat -> seat.getSeatType() == seatType && seat.getCapacity() > 0)
+                    .findFirst();
+    }
+
 }

@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.uniquindio.finalproject.unievents.Purchase.PurchaseBuilder;
 
@@ -19,6 +21,7 @@ public class User implements Serializable {
     private String phoneNumber;
     private String mail;
     private String password;
+    // UnieventsApplication app;
     private final Collection<Purchase> logPurchase;
 
     public User(int ID, String name, String lastname, String phoneNumber, String mail, String password){
@@ -31,40 +34,39 @@ public class User implements Serializable {
         this.logPurchase = new LinkedList<>();
         this.cupons = new LinkedList<>();
         //Primer cupon de 15% por registro
+        // app = UnieventsApplication.getInstance();
         CuponFactory cuponFactory = new CuponFactory();
-
         cupons.add(cuponFactory.createCupon(CuponType.REGISTERED , (float) 0.15, LocalDate.now().plusDays(30)));
    
     }
-    public void rawPurchase(Seat seat, float valuePurchase)  
+    public Purchase rawPurchase(SeatType seat, float valuePurchase)  
     {   
  
         String purchaseID = UUID.randomUUID().toString();
         PurchaseBuilder builder = new PurchaseBuilder();
-        Purchase purchase = builder.idBill(purchaseID).seat(seat).valuePurchase(valuePurchase).build();
         
         // For the future Set an Exception
-        if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase); else System.out.println("Can't be possible"); 
         firstCuponValidation();
+        return builder.idBill(purchaseID).seat(seat).valuePurchase(valuePurchase).build();
     }
-    public void cuponPurchase(Seat seat, float valuePurchase, Cupon cupon)
+    public Purchase cuponPurchase(SeatType seat, float valuePurchase, float cuponValue)
     {
         String purchaseID = UUID.randomUUID().toString();
         PurchaseBuilder builder = new PurchaseBuilder();
-        Purchase purchase = builder.idBill(purchaseID).seat(seat).valuePurchase(valuePurchase).cupon(cupon).build();
-        
-        if(!verifyPurchuse(purchase).isPresent()) logPurchase.add(purchase); else System.out.println("Can't be possible"); 
         firstCuponValidation();
+
+        return builder.idBill(purchaseID).seat(seat).valuePurchase(valuePurchase  - (valuePurchase * cuponValue)).build();
+        
+        
     }
-    
+    public void addPurchase(Purchase purchase){
+        logPurchase.add(purchase);
+    }
     public Optional<Cupon> searchCupon(float discountValue, LocalDate dateOfExpiry) {
         Predicate<Cupon> condition = c -> c.getValue() == discountValue && c.getDateOfExpiry().equals(dateOfExpiry);
         return cupons.stream().filter(condition).findAny();
     }
-    private Optional<Purchase> verifyCupon(Cupon cupon){
-        Predicate<Purchase> condition = p-> p.getCupon().equals(cupon);
-        return logPurchase.stream().filter(condition).findAny();
-    }
+
     private Optional<Purchase> verifyPurchuse(Purchase purchase){
         Predicate<Purchase> condition = p-> p.getId().equals(purchase.getId());
         return logPurchase.stream().filter(condition).findAny();
@@ -75,8 +77,25 @@ public class User implements Serializable {
         boolean cuponValidation = cupons.stream().filter(condicion).findAny().isPresent();
         if(!cuponValidation && cupons.size() <= 1) {
             CuponFactory cuponFactory = new CuponFactory();
+        
             cupons.add(cuponFactory.createCupon(CuponType.FIRST_PURCHASE , (float) 0.15, LocalDate.now().plusDays(30)));
         }
+    }
+    public List<Float> getAllDiscountValues() {
+        return cupons.stream()
+                     .map(Cupon::getValue)
+                     .collect(Collectors.toList());
+    }
+    
+    public void removeCupon(float discountValue) {
+        Optional<Cupon> cuponToRemove = cupons.stream()
+                                              .filter(c -> c.getValue() == discountValue)
+                                              .findFirst();
+        cuponToRemove.ifPresent(cupons::remove);
+    }
+
+    public Collection<Purchase> getLogPurchase() {
+        return logPurchase;
     }
     public Collection<Cupon> getCupons() {
         return cupons;

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -136,4 +137,15 @@ public class DataUniEvent implements Serializable {
             return null;
         }
     }
+    public Collection<Event> filterEvents(String city, String eventName, EventType eventType) {
+        if (city == null && eventName == null && eventType == null) {
+            showAlert(AlertType.WARNING, "Validation Error", "At least one parameter (city, event name, or event type) must be provided for filtering.");
+            return events;
+        }
+
+        return events.stream()
+                .filter(event -> (event.getCity().equals(city)) || event.getName().equals(eventName) ||
+                                 event.getEventType().equals(eventType)).collect(Collectors.toList());
+    }
+
 }

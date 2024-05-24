@@ -1,30 +1,31 @@
 package com.uniquindio.finalproject.unievents;
 
-public class Purchase {
+import java.io.Serializable;
+
+public class Purchase implements Serializable{
 
   private final String id;
-  private final Seat seat;
+  private final SeatType seat;
   private final float valuePurchase;
-  private final Cupon cupon;
-  private Purchase(String id, Seat seat, float valuePurchase, Cupon cupon) {
+
+  private Purchase(String id, SeatType seat, float valuePurchase) {
     this.id = id;
     this.seat = seat;
     this.valuePurchase = valuePurchase;
-    this.cupon = cupon;
+
   }
 
   public static class PurchaseBuilder {
     private String id;
-    private Seat seat;
+    private SeatType seat;
     private float valuePurchase;
-    private Cupon cupon;
 
     public PurchaseBuilder idBill(String id) {
       this.id = id;
       return this;
     }
 
-    public PurchaseBuilder seat(Seat seat) {
+    public PurchaseBuilder seat(SeatType seat) {
       this.seat = seat;
       return this;
     }
@@ -34,16 +35,13 @@ public class Purchase {
       return this;
     }
 
-    public PurchaseBuilder cupon(Cupon cupon) {
-      this.cupon = cupon;
-      return this;
-    }
+
 
     public Purchase build() {
       if (id == null || seat == null || valuePurchase <= 0) {
         throw new IllegalArgumentException("Missing required attributes: id, seat, and valuePurchase");
       }
-      return new Purchase(id, seat, valuePurchase, cupon);
+      return new Purchase(id, seat, valuePurchase);
     }
   }
 
@@ -51,7 +49,7 @@ public class Purchase {
     return id;
   }
 
-  public Seat getLocation() {
+  public SeatType getLocation() {
     return seat;
   }
 
@@ -59,7 +57,4 @@ public class Purchase {
     return valuePurchase;
   }
 
-  public Cupon getCupon() {
-    return cupon;
-  }
 }

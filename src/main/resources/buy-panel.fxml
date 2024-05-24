@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorRoot" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uniquindio.finalproject.unievents.BuyPanelController">
+   <children>
+      <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
+        <items>
+            <VBox id="container-sign-in" alignment="CENTER" prefHeight="600.0" prefWidth="390.0" stylesheets="@css%20sources/style.css">
+               <children>
+                  <ImageView fitHeight="241.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/SCREEN01_8.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label id="login-text-w" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="379.0" stylesheets="@css%20sources/style.css" text="Events Filter" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="41.0">
+                     <children>
+                        <Label id="simple-white-text" alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="13.0" prefHeight="25.0" prefWidth="65.0" stylesheets="@css%20sources/style.css" text="Name" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField id="standard-field-input" fx:id="nameEventField" minHeight="40.0" prefHeight="40.0" prefWidth="169.0" stylesheets="@css%20sources/style.css">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></TextField>
+                        <Label id="simple-white-text" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="54.0" stylesheets="@css%20sources/style.css" text="City" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField id="standard-field-input" fx:id="cityField" minHeight="40.0" prefHeight="40.0" prefWidth="160.0" stylesheets="@css%20sources/style.css">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label id="simple-white-text" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="73.0" stylesheets="@css%20sources/style.css" text="Type" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <ChoiceBox id="standard-choice-menu" fx:id="typeField" prefHeight="30.0" prefWidth="143.0" stylesheets="@css%20sources/style.css">
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </ChoiceBox>
+                        <Button id="simple-transparent-btn" minHeight="35.0" mnemonicParsing="false" onAction="#searchEvents" prefHeight="24.0" prefWidth="115.0" style="-fx-font-size: 16px;" stylesheets="@css%20sources/style.css" text="Search">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TableView fx:id="eventTable" maxHeight="300.0" maxWidth="919.0" prefHeight="163.0" prefWidth="898.0">
+                     <columns>
+                        <TableColumn fx:id="nameColumn" minWidth="20.0" prefWidth="133.0" text="Name" />
+                        <TableColumn fx:id="typeColumn" prefWidth="111.0" text="Type" />
+                        <TableColumn fx:id="cityColumn" prefWidth="147.0" text="City" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="150.0" text="Description" />
+                        <TableColumn fx:id="addressColumn" prefWidth="162.0" text="Address" />
+                        <TableColumn fx:id="dateColumn" prefWidth="146.0" text="Date" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="898.0" spacing="20.0">
+                     <children>
+                        <Button id="button-6" fx:id="homeBtn" alignment="CENTER" mnemonicParsing="false" onAction="#backHome" prefHeight="40.0" prefWidth="103.0" stylesheets="@css%20sources/filterPanel_Style.css" text="HOME">
+                           <HBox.margin>
+                              <Insets right="450.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button id="button-6" alignment="CENTER" maxHeight="40.0" mnemonicParsing="false" onAction="#clearFilters" prefHeight="40.0" prefWidth="151.0" stylesheets="@css%20sources/filterPanel_Style.css" text="CLEAR FILTERS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Button id="button-6" fx:id="nextBtn" alignment="CENTER" layoutX="432.0" layoutY="10.0" mnemonicParsing="false" onAction="#nextStep" prefHeight="40.0" prefWidth="105.0" stylesheets="@css%20sources/filterPanel_Style.css" text="NEXT">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+        </items>
+      </SplitPane>
+      <HBox id="container-sign-in" fx:id="sidebar" alignment="CENTER" prefHeight="598.0" prefWidth="898.0" stylesheets="@css%20sources/style.css" visible="false">
+         <children>
+            <VBox alignment="CENTER" prefHeight="598.0" prefWidth="547.0">
+               <children>
+                  <ImageView fitHeight="206.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/SCREEN02_Mesa%20de%20trabajo%201.png" />
+                     </image>
+                  </ImageView>
+                  <Label id="login-text-w" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="379.0" stylesheets="@css%20sources/style.css" text="Almost there!" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="243.0">
+                     <children>
+                        <Label id="simple-white-text" contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" stylesheets="@css%20sources/style.css" text="Tickets" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField id="standard-field-input" fx:id="buyTicketsNumField" prefHeight="43.0" prefWidth="159.0" promptText="Number of Tickets" stylesheets="@css%20sources/style.css" />
+                        <Label id="simple-white-text" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="68.0" stylesheets="@css%20sources/style.css" text="Cupons" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="41.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ChoiceBox id="standard-choice-menu" fx:id="buyCuponField" prefHeight="30.0" prefWidth="147.0" stylesheets="@css%20sources/style.css">
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ChoiceBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="645.0">
+                     <children>
+                        <Label id="simple-white-text" contentDisplay="RIGHT" layoutX="408.0" layoutY="18.0" prefHeight="27.0" prefWidth="68.0" stylesheets="@css%20sources/style.css" text="Seat" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="28.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ChoiceBox id="standard-choice-menu" fx:id="buySeatTypeField" layoutX="485.0" layoutY="17.0" prefHeight="30.0" prefWidth="159.0" stylesheets="@css%20sources/style.css">
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets left="20.0" right="62.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
+                        <Button id="simple-transparent-btn" mnemonicParsing="false" onAction="#buyTicket" prefHeight="35.0" prefWidth="92.0" stylesheets="@css%20sources/style.css" text="BUY">
+                           <HBox.margin>
+                              <Insets left="20.0" right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button id="simple-transparent-btn" layoutX="418.0" layoutY="13.0" mnemonicParsing="false" onAction="#cancelBuy" prefHeight="35.0" prefWidth="101.0" stylesheets="@css%20sources/style.css" text="CANCEL">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
