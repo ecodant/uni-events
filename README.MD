@@ -5,7 +5,7 @@ UniEvents is a Java-based application designed to manage event ticketing. It pro
 
 ### Technologies
 * **Programming Language:** Java 22
-* **Framework: ** Spring Boot
+* **Framework:** Spring Boot
 * **Build Tool:** Maven
 * **User Interface:** JavaFX
 * **Persistence:** Serialization
