@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorRoot" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uniquindio.finalproject.unievents.PurchaseCompleteController">
+   <children>
+      <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
+        <items>
+            <VBox id="container-white" alignment="CENTER" stylesheets="@css%20sources/style.css">
+               <children>
+                  <ImageView fitHeight="349.0" fitWidth="910.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@img/01-01.png" />
+                     </image>
+                  </ImageView>
+                  <Label id="event-text" alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="335.0" stylesheets="@css%20sources/style.css" text="UNI-EVENTS" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="898.0" spacing="20.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button id="edit-btn" alignment="CENTER" mnemonicParsing="false" onAction="#backProfile" prefHeight="35.0" prefWidth="215.0" stylesheets="@css%20sources/adminPanel_Style.css" text="BACK TO YOUR PROFILE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,42 @@
+#header-text{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-text-fill: #5a5757;
+    -fx-font-size: 26px;
+    -fx-aligment:center;
+    -fx-font-weight: bold;
+}
+
+#edit-btn {
+    -fx-aligment:center;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgba(99, 198, 225, 0.9) 0%,  rgba(57, 205, 234, 0.9) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+
+}
+#standard-choice-menu{
+    -fx-background-color: rgb(192, 218, 255);
+}
+#standard-field-input{
+    /* -fx-max-width: 100px; */
+    -fx-font-size: 14px;
+    -fx-border-width: 0px;
+    -fx-border-color: #cccccc;
+    -fx-background-color: #effbff;
+    -fx-text-fill: #c4c4c4;
+    -fx-border-style: solid;
+    -fx-border-radius: 0px;
+    -fx-effect: dropshadow(three-pass-box, rgba(66,66,66,.5), 2, 0, 0, 0);
+    -fx-border-insets: 6px;
+    -fx-background-insets: 6px;
+}
+#checkbox-wrapper-13 {
+    -fx-appearance: none;  /* Remove default checkbox appearance */
+    -fx-pref-height: 21px;  /* Set preferred height */
+    -fx-cursor: hand;  /* Set cursor to pointer on hover */
+    
+  }

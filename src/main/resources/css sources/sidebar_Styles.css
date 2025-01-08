@@ -1,0 +1,65 @@
+/* .label{
+    -fx-font-family: "Open Sans", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-font-size: 22px;
+    -fx-aligment:center;
+    -fx-font-weight: medium;
+} */
+
+#info-text{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-line-spacing: -5px;
+    -fx-text-fill: #4e4e4e;
+    -fx-font-size: 22px;
+    -fx-aligment:center;
+    -fx-font-weight: bold;
+}
+#dialog-Text{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-text-fill: #525252;
+    -fx-font-size: 19px;
+    -fx-aligment:center;
+    -fx-font-weight: normal;
+}
+#background-sidebar{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-color: linear-gradient(to right, #f9fcff 0%, #e1f5f9 100%);
+    -fx-aligment:center;
+}
+#btn-load{
+    -fx-aligment:center;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgb(55, 205, 185) 0%,  rgb(41, 207, 193) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+
+}
+#btn-cancel {
+    -fx-aligment:center;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgba(255, 133, 206, 0.9) 0%,  rgba(255, 105, 150, 0.9) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+
+}
+#btn-next {
+    -fx-aligment:center;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to right, rgba(109, 180, 213, 0.9) 0%,  rgba(94, 168, 234, 0.9) 100%);
+    -fx-padding: 5px 15px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+}
+#editor-container{
+    -fx-background-color: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%,  rgba(239, 250, 255, 0.9) 100%);
+    -fx-background-radius: 20px 20px ;
+    -fx-effect: dropshadow(gaussian, rgba(55, 55, 55, 0.4), 10, 0.3, 5, 10);  /* Adjust shadow properties */
+}
